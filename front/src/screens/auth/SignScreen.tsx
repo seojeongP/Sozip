@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, TextInput} from 'react-native';
 import useForm from '@/hooks/useForm';
 import CustomButton from '@/components/CustomButton';
 import { validateSignup } from '@/utils';
-import { TextInput } from 'react-native-gesture-handler';
 import useAuth from '@/hooks/queries/useAuth';
 import InputField from '@/components/InputField';
 
@@ -29,7 +28,7 @@ function SignScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
-      <InputField 
+          <InputField 
             autoFocus
             placeholder='이메일' 
             error={signup.errors.email}

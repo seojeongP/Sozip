@@ -1,17 +1,18 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet, View, Image, Dimensions, TouchableOpacity, Text} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import CustomButton from '@/components/CustomButton';
 import { authNavigations, mapNavigations } from '@/constants';
-import { AuthStackParamList } from '@/navigations/stack/AuthStackNavigator';
 import { MapStackParamList } from '@/navigations/stack/MapStackNavigator';
+import useAuth from '@/hooks/queries/useAuth';
 
 type MainHomeScreenProps = StackScreenProps<MapStackParamList, typeof mapNavigations.MAIN_HOME>;
 
 function MainHomeScreen({navigation}: MainHomeScreenProps) {
+  const {logoutMutation} = useAuth();
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+      <View style={styles.componentcontainer}>
         <Text style={styles.title}>청춘 소집</Text>
         <View style={styles.twocategories}>
           <View style={styles.imageContainer}>
@@ -38,7 +39,18 @@ function MainHomeScreen({navigation}: MainHomeScreenProps) {
                 source={require('../../assets/loan.png')} />
             </TouchableOpacity>
           </View>
+          <View style={styles.loan}>
+          <View style={[styles.imageContainer]}>
+            <TouchableOpacity onPress={()=>navigation.navigate(mapNavigations.LOAN)}>
+              <Image 
+                resizeMode="contain"
+                // style={styles.image} 
+                source={require('../../assets/info.png')} />
+            </TouchableOpacity>
+          </View>
+          </View>
         </View>
+        <Button title="로그아웃" onPress={()=>logoutMutation.mutate(null)} />
       </View>
     </SafeAreaView>
   )
@@ -49,6 +61,12 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     alignItems: 'center',
+  },
+  componentcontainer: {
+    flex: 1,
+    margin: 10,
+    alignItems: 'center',
+    flexDirection: 'column',
   },
   twocategories: {
     flex: 1,

@@ -38,7 +38,7 @@ const getProfile = async():Promise<ResponseProfile> => {
     return data;
 }
 
-//Token Refresh
+//Token Refresh 받아옴
 const getAccessToken = async(): Promise<ResponseToken> => {
     const refreshToken = await getEncryptStorage('refreshToken')
     const {data} = await axiosInstance.get('/auth/refresh', {

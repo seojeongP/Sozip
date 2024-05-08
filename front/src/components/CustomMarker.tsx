@@ -1,12 +1,16 @@
 import { colors } from '@/constants';
-import { MarkerColor } from '@/types/domain';
+import { symbols } from '@/constants/symbols';
+import { MarkerColor, MarkerSymbol } from '@/types/domain';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { LatLng, MapMarkerProps, Marker } from 'react-native-maps';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 interface CustomMarkerProps extends MapMarkerProps {
     coordinate: LatLng;
     color: MarkerColor;
+    symbol?: MarkerSymbol;
+    score?: number;
 }
 
 const colorHex = {
@@ -17,11 +21,23 @@ const colorHex = {
     PURPLE: colors.PURPLE_400,
 }
 
-function CustomMarker({coordinate, color, ...props}: CustomMarkerProps) {
+const symbolList = {
+    APART: symbols.APART,
+    VILLA: symbols.VILLA,
+    BUS_STOP: symbols.BUS_STOP,
+    METRO: symbols.METRO,
+    CONV_STORE: symbols.CONV_STORE,
+    PHARMACY: symbols.PHARMACY,
+    string: symbols.string,
+}
+
+function CustomMarker({coordinate, color, symbol='string', score=5, ...props}: CustomMarkerProps) {
   return (
     <Marker coordinate={coordinate} {...props}>
         <View style={styles.container}>
-            <View style={[styles.marker, {backgroundColor: colorHex[color]}]}></View>
+            {/* <View style={[styles.marker, {backgroundColor: colorHex[color]}]}> */}
+                <MaterialIcons name={symbolList[symbol]} color={colors.BLACK} size={25}/>
+            {/* </View> */}
         </View>
     </Marker>
   )

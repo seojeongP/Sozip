@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     filled: {
-        backgroundColor: colors.BLUE_700,
+        backgroundColor: colors.BLUE_MAIN,
     },
     outlined: {
-        borderColor: colors.BLUE_700,
+        borderColor: colors.BLUE_MAIN,
         borderWidth: 1,
     },
     filledPressed: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         color: colors.WHITE,
     },
     outlinedText: {
-        color: colors.BLUE_700,
+        color: colors.BLUE_MAIN,
     },
 });
 

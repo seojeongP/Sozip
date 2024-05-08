@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateLogin } from '@/utils';
-import { TextInput } from 'react-native-gesture-handler';
 import InputField from '@/components/InputField';
 import useAuth from '@/hooks/queries/useAuth';
 import useForm from '@/hooks/useForm';

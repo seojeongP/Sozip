@@ -1,4 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
+import {NavigatorScreenParams} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { mapNavigations } from '@/constants/navigations';
@@ -9,10 +10,14 @@ import LoanMainScreen from '@/screens/loans/LoanMainScreen';
 import MainHomeScreen from '@/screens/auth/MainHomeScreen';
 import AddPostScreen from '@/screens/map/AddPostScreen';
 import { LatLng } from 'react-native-maps';
+import SelectRegionScreen from '@/screens/map/SelectRegionScreen';
+import { FeedStackParamList } from './FeedStackNavigator';
 
 export type MapStackParamList = {
     [mapNavigations.MAIN_HOME]: undefined;
+    [mapNavigations.SELECT_REGION]: undefined;
     [mapNavigations.MAP_HOME]: undefined;
+    // [mapNavigations.FEED]: NavigatorScreenParams<FeedStackParamList>;
     [mapNavigations.FEED]: undefined;
     [mapNavigations.LOAN]: undefined;
     [mapNavigations.ADD_POST]: {location: LatLng};
@@ -46,6 +51,13 @@ function MapStackNavigator() {
         }}
       />
       <Stack.Screen 
+        name={mapNavigations.SELECT_REGION} 
+        component={SelectRegionScreen} 
+        options={{
+          headerTitle: '지역 선택',
+        }}
+      />
+      <Stack.Screen 
         name={mapNavigations.MAP_HOME} 
         component={MapHomeScreen} 
         options={{
@@ -70,7 +82,7 @@ function MapStackNavigator() {
         name={mapNavigations.ADD_POST} 
         component={AddPostScreen} 
         options={{
-          headerTitle: '장소 추가',
+          headerTitle: '매물 추가',
         }}
       />
     </Stack.Navigator>

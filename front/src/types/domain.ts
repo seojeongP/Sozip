@@ -1,5 +1,7 @@
 type MarkerColor = 'RED' | 'YELLOW' | 'GREEN' | 'BLUE' | 'PURPLE';
 
+type MarkerSymbol = 'APART' | 'VILLA' | 'CONV_STORE' | 'PHARMACY' | 'BUS_STOP' | 'METRO' | 'string';
+
 type Category = {
   [key in MarkerColor]: string;
 };
@@ -15,6 +17,7 @@ interface Marker {
   longitude: number;
   color: MarkerColor;
   score: number;
+  symbol: string;
 }
 
 interface Post extends Marker {
@@ -33,4 +36,4 @@ interface Profile {
   loginType: 'email' | 'kakao' | 'apple';
 }
 
-export type {MarkerColor, Category, ImageUri, Marker, Post, Profile}
+export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile}

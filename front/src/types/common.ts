@@ -17,4 +17,6 @@ type UseMutationCustomOptions<TData = unknown, TVariables=unknown> = Omit<
     'queryKey'
 >;
 
- export type {ResponseError, UseMutationCustomOptions, UseQueryCustomOptions};
+type ThemeMode = 'light' | 'dark'
+
+ export type {ResponseError, UseMutationCustomOptions, UseQueryCustomOptions, ThemeMode};

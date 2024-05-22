@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, Pressable, PressableProps, Dimensions, View} from 'react-native';
 import { colors } from '../constants';
+import useThemeStore from '@/store/useThemStore';
+import { ThemeMode } from '@/types';
 
 interface CustomImageButtonProps extends PressableProps{
     label: string;
@@ -18,6 +20,8 @@ function CustomImageButton({
     inValid=false,
     ...props //presableprops가 제공하는 누르기 기능 사용 가능
 }: CustomImageButtonProps) {
+    const {theme} = useThemeStore();
+    const styles = styling(theme);
   return (
     <Pressable
         disabled={inValid} 
@@ -34,7 +38,7 @@ function CustomImageButton({
   );
 }
 
-const styles = StyleSheet.create({
+const styling = (theme: ThemeMode) => StyleSheet.create({
     container: {
         borderRadius: 3,
         justifyContent: 'center',
@@ -44,17 +48,17 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     filled: {
-        backgroundColor: colors.BLUE_700,
+        backgroundColor: colors[theme].BLUE_700,
     },
     outlined: {
-        borderColor: colors.BLUE_700,
+        borderColor: colors[theme].BLUE_700,
         borderWidth: 1,
     },
     filledPressed: {
-        backgroundColor: colors.BLUE_500,
+        backgroundColor: colors[theme].BLUE_500,
     },
     outlinedPressed: {
-        borderColor: colors.BLUE_500,
+        borderColor: colors[theme].BLUE_500,
         borderWidth: 1,
     },
     large: {
@@ -76,10 +80,10 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     filledText: {
-        color: colors.WHITE,
+        color: colors[theme].WHITE,
     },
     outlinedText: {
-        color: colors.BLUE_700,
+        color: colors[theme].BLUE_700,
     },
 });
 

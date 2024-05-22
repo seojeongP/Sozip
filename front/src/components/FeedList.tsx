@@ -14,8 +14,9 @@ const FeedList = () => {
   }
 
   const hadleEndReached = () => {
+    //다음페이지가 있고 가져오는 중이 아니라면
     if(hasNextPage && !isFetchingNextPage) {
-        fetchNextPage();
+        fetchNextPage(); //다음 페이지 가져옴
     }
   }
     return (
@@ -23,16 +24,16 @@ const FeedList = () => {
             data={posts?.flat()}
             renderItem={({item})=><FeedItem post={item} />}
             keyExtractor={item => String(item.id)}
-            numColumns={2}
+            numColumns={1}
             contentContainerStyle={styles.contentContainer}
             onEndReached={hadleEndReached}
-            onEndReachedThreshold={0.5}
-            refreshing={isRefreshing}
-            onRefresh={handleRefresh}
+            onEndReachedThreshold={0.5} //완전히 바닥에 닿기 전에 다음 페이지 가져오기
+            refreshing={isRefreshing} //위로 끌어당겼을 때 새로고침
+            onRefresh={handleRefresh} 
             scrollIndicatorInsets={{right:1}}
             indicatorStyle='black'
+            style={styles.shadow}
         >
-
         </FlatList>
     );
 }
@@ -40,6 +41,13 @@ const FeedList = () => {
 const styles = StyleSheet.create({
     contentContainer:{
         padding: 15,
+    },
+    shadow: {
+
+        // shadowColor: '#171717',
+        // shadowOffset: {width: -2, height: 4},
+        // shadowOpacity: 0.2,
+        // shadowRadius: 3,
     },
 });
 

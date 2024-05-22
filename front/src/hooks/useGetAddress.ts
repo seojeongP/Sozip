@@ -2,6 +2,7 @@ import { errorMessages } from '@/constants/messages';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {LatLng} from 'react-native-maps';
+import Config from 'react-native-config';
 
 function useGetAddress(location: LatLng) {
     const {latitude, longitude} = location;
@@ -11,7 +12,7 @@ function useGetAddress(location: LatLng) {
         (async () => {
             try {
                 const {data} = await axios.get(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=street_address|route|political&key=AIzaSyC8k-BRQrZwhqqW-OVObKhnWcKOihsSs6o&language=ko`
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=street_address|route|political&key=${Config.GOOGLE_API_KEY}&language=ko`
                 );
                 
                 // console.log('data', data);
@@ -19,6 +20,8 @@ function useGetAddress(location: LatLng) {
                 ? data.results[0].formatted_address 
                 : `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
                 console.log('address', address);
+                console.log('latitude', latitude);
+                console.log('longitude', longitude);
                 
                 setResult(address)
             } catch (error){

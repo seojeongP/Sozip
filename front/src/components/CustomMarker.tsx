@@ -1,5 +1,7 @@
 import { colors } from '@/constants';
 import { symbols } from '@/constants/symbols';
+import useThemeStore from '@/store/useThemStore';
+import { ThemeMode } from '@/types';
 import { MarkerColor, MarkerSymbol } from '@/types/domain';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -13,14 +15,6 @@ interface CustomMarkerProps extends MapMarkerProps {
     score?: number;
 }
 
-const colorHex = {
-    RED: colors.PINK_400,
-    BLUE: colors.BLUE_400,
-    GREEN: colors.GREEN_400,
-    YELLOW: colors.YELLOW_400,
-    PURPLE: colors.PURPLE_400,
-}
-
 const symbolList = {
     APART: symbols.APART,
     VILLA: symbols.VILLA,
@@ -28,22 +22,24 @@ const symbolList = {
     METRO: symbols.METRO,
     CONV_STORE: symbols.CONV_STORE,
     PHARMACY: symbols.PHARMACY,
-    string: symbols.string,
+    string: symbols.string
 }
 
 function CustomMarker({coordinate, color, symbol='string', score=5, ...props}: CustomMarkerProps) {
+    const {theme} = useThemeStore();
+    const styles = styling(theme);
   return (
     <Marker coordinate={coordinate} {...props}>
         <View style={styles.container}>
             {/* <View style={[styles.marker, {backgroundColor: colorHex[color]}]}> */}
-                <MaterialIcons name={symbolList[symbol]} color={colors.BLACK} size={25}/>
+                <MaterialIcons name={symbolList[symbol]} color={colors[theme].BLACK} size={25}/>
             {/* </View> */}
         </View>
     </Marker>
   )
 }
 
-const styles = StyleSheet.create({
+const styling = (theme: ThemeMode) => StyleSheet.create({
     container: {
         height: 35,
         width: 32,
@@ -56,7 +52,7 @@ const styles = StyleSheet.create({
         borderRadius: 27,
         borderBottomRightRadius: 1,
         borderWidth: 1,
-        borderColor: colors.BLACK,
+        borderColor: colors[theme].BLACK,
     },
 });
 

@@ -1,10 +1,16 @@
-import { colors } from '@/constants';
+import { colors, feedNavigations, mainNavigations } from '@/constants';
 import useGetPost from '@/hooks/queries/useGetPost';
 import React from 'react';
 import {Dimensions, Image, Modal, Platform, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import CustomMarker from './CustomMarker';
 import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
+import { FeedStackParamList } from '@/navigations/stack/FeedStackNavigator';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { MainStackParamList } from '@/navigations/stack/MainStackNavigator';
+import { ThemeMode } from '@/types';
+import useThemeStore from '@/store/useThemStore';
 
 interface MarkerModalProps {
     markerId: number|null;
@@ -12,11 +18,29 @@ interface MarkerModalProps {
     hide: ()=> void;
 }
 
-const MarkerModal = ({markerId, isVisible, hide}: MarkerModalProps) => {
+type Navigation = CompositeNavigationProp<
+    StackNavigationProp<MainStackParamList>,
+    StackNavigationProp<FeedStackParamList>
+  >;
+
+function MarkerModal({markerId, isVisible, hide}: MarkerModalProps) {
+  const {theme} = useThemeStore();
+  const styles = styling(theme);
+  const navigation = useNavigation<Navigation>()
     const {data: post, isPending, isError} = useGetPost(markerId);
     if (isPending || isError){
         return <></>;
     }
+
+    const handlePressModal = ()=>{
+      navigation.navigate(mainNavigations.FEED, {
+        screen: feedNavigations.FEED_DETAIL,
+        params: {
+          id: post.id
+        },
+        initial: false,
+        });
+    };
 
   return (
     //     <Modal visible={isVisible} transparent={true} animationType={'slide'}>
@@ -30,7 +54,7 @@ const MarkerModal = ({markerId, isVisible, hide}: MarkerModalProps) => {
   
     <Modal visible={isVisible} transparent={true} animationType={'slide'}>
       <SafeAreaView style={[styles.optionBackground]} onTouchEnd={hide}>
-        <Pressable style={styles.cardContainer} onPress={() => {}}>
+        <Pressable style={styles.cardContainer} onPress={handlePressModal}>
           <View style={styles.cardInner}>
             <View style={styles.cardAlign}>
                 <View
@@ -39,7 +63,7 @@ const MarkerModal = ({markerId, isVisible, hide}: MarkerModalProps) => {
                 </View>
               <View style={styles.infoContainer}>
                 <View style={styles.addressContainer}>
-                  <Octicons name="location" size={10} color={colors.GRAY_500} />
+                  <Octicons name="location" size={10} color={colors[theme].GRAY_500} />
                   <Text
                     style={styles.addressText}
                     ellipsizeMode="tail"
@@ -55,7 +79,7 @@ const MarkerModal = ({markerId, isVisible, hide}: MarkerModalProps) => {
               <MaterialIcons
                 name="arrow-forward-ios"
                 size={20}
-                color={colors.BLACK}
+                color={colors[theme].BLACK}
               />
             </View>
           </View>
@@ -65,20 +89,20 @@ const MarkerModal = ({markerId, isVisible, hide}: MarkerModalProps) => {
   );
 }
 
-const styles = StyleSheet.create({
+const styling = (theme: ThemeMode) => StyleSheet.create({
     optionBackground: {
       flex: 1,
       justifyContent: 'flex-end',
     },
     cardContainer: {
-      backgroundColor: colors.WHITE,
+      backgroundColor: colors[theme].WHITE,
       margin: 10,
       borderRadius: 20,
-      shadowColor: colors.BLACK,
+      shadowColor: colors[theme].BLACK,
       shadowOffset: {width: 3, height: 3},
       shadowOpacity: 0.2,
       elevation: 1,
-      borderColor: colors.GRAY_500,
+      borderColor: colors[theme].GRAY_500,
       borderWidth: 1.5,
     },
     cardInner: {
@@ -96,7 +120,7 @@ const styles = StyleSheet.create({
     emptyImageContainer: {
       justifyContent: 'center',
       alignItems: 'center',
-      borderColor: colors.GRAY_200,
+      borderColor: colors[theme].GRAY_200,
       borderRadius: 35,
       borderWidth: 1,
     },
@@ -121,18 +145,18 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     addressText: {
-      color: colors.GRAY_500,
+      color: colors[theme].GRAY_500,
       fontSize: 10,
     },
     titleText: {
-      color: colors.BLACK,
+      color: colors[theme].BLACK,
       fontSize: 15,
       fontWeight: 'bold',
     },
     dateText: {
       fontSize: 12,
       fontWeight: 'bold',
-      color: colors.PINK_700,
+      color: colors[theme].PINK_700,
     },
     nextButton: {
       width: 40,

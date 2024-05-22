@@ -29,6 +29,24 @@ const postLogin = async({email, password}:RequestUser):Promise<ResponseToken> =>
     return data;
 };
 
+const kakaoLogin = async(token: string): Promise<ResponseToken> => {
+    const {data} = await axiosInstance.post('/auth/oauth/kakao', {token});
+
+    return data;
+};
+
+type RequestAppleIdentity = {
+    identityToken: string;
+    appId: string;
+    nickname: string | null;
+}
+
+const appleLogin = async(body: RequestAppleIdentity): Promise<ResponseToken> => {
+    const {data} = await axiosInstance.post('/auth/oauth/apple', body);
+
+    return data;
+};
+
 type ResponseProfile = Profile & Category; //types>domain.ts에 정의되어 있음
 
 // 로그인한 유저의 정보를 가져옴
@@ -37,6 +55,14 @@ const getProfile = async():Promise<ResponseProfile> => {
 
     return data;
 }
+
+type RequestProfile = Omit<Profile, 'id' | 'email' | 'kakaoImageUri' | 'loginType'>;
+
+const editProfile = async(body: RequestProfile): Promise<ResponseProfile> => {
+    const {data}= await axiosInstance.patch('/auth/me', body)
+
+    return data;
+} 
 
 //Token Refresh 받아옴
 const getAccessToken = async(): Promise<ResponseToken> => {
@@ -54,6 +80,33 @@ const logout = async() =>{
     await axiosInstance.post('/auth/logout');
 };
 
-export {postSignup, postLogin, getProfile, getAccessToken, logout};
+const deleteAccount = async () => {
+    await axiosInstance.delete('/auth/me');
+}
 
-export type {RequestUser, ResponseToken, ResponseProfile, }
+const editCategory = async(body: Category): Promise<ResponseProfile> => {
+    const {data} = await axiosInstance.patch('/auth/category', body);
+
+    return data;
+}
+
+export {
+    postSignup, 
+    postLogin, 
+    getProfile, 
+    getAccessToken, 
+    logout, 
+    kakaoLogin, 
+    appleLogin, 
+    editProfile,
+    deleteAccount,
+    editCategory,
+};
+
+export type {
+    RequestUser, 
+    ResponseToken, 
+    ResponseProfile, 
+    RequestAppleIdentity,
+    RequestProfile,
+}

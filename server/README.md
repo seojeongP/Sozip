@@ -266,7 +266,7 @@ type ResponseSinglePost = ResponsePost & { isFavorite: boolean };
 ResponsePost[];
 ```
 
-#### GET /posts/my/search
+#### GET /posts/my/search?query=검색어&page=1
 
 - query
 

@@ -26,6 +26,19 @@ const getPost = async(id:number): Promise<ResponseSinglePost> => {
     return data;
 };
 
-export {createPost, getPost, getPosts};
+//즐겨찾기 게시물만 불러오기
+const getFavoritePosts = async(page = 1): Promise<ResponsePost[]> => {
+    const {data} = await axiosInstance.get(`/favorites/my?page=${page}`);
+
+    return data;
+}
+
+const updateFavoritePost = async (id: number): Promise<number> => {
+    const {data} = await axiosInstance.post(`/favorites/${id}`);
+
+    return data;
+}
+
+export {createPost, getPost, getPosts, getFavoritePosts, updateFavoritePost};
 
 export type {ResponsePost, RequestCreatePost, ResponseSinglePost};

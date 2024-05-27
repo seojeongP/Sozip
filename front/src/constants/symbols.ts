@@ -1,7 +1,7 @@
 const symbols ={
     //MaterialIcons
 
-    APART: 'apartment',
+    MM: 'apartment',
     VILLA: 'home',
 
     CONV_STORE: 'storefront',

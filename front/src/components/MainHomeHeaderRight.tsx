@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import HeaderButton from './HeaderButton';
+import HeaderButton from './common/HeaderButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 function MainHomeHeaderLeft(onSubmit: ()=>void) {

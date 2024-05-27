@@ -1,4 +1,4 @@
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { loanNavigations } from '@/constants';
 import { LoanStackParamList } from '@/navigations/stack/LoanStackNavigator';
 import { StackScreenProps } from '@react-navigation/stack';

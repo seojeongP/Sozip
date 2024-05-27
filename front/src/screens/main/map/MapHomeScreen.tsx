@@ -8,18 +8,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CompositeNavigationProp, useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MainStackParamList } from '@/navigations/stack/MainStackNavigator';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import CustomMarker from '@/components/CustomMarker';
+import CustomMarker from '@/components/common/CustomMarker';
 import { alerts } from '@/constants/messages';
 import useGetMarkers from '@/hooks/queries/useGetMarkers'
-import MarkerModal from '@/components/MarkerModal';
 import useModal from '@/hooks/useModal';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import AddPostHeaderRight from '@/components/AddPostHeaderRight';
 import { ScrollView } from 'react-native-gesture-handler';
-import FeedList from '@/components/FeedList';
+import FeedList from '@/components/feed/FeedList';
 import { MapStackParamList } from '@/navigations/stack/MapStackNavigator';
 import useLocationStore from '@/store/useLocationStore';
 import useMoveMapView from '@/hooks/useMoveMapView';
@@ -29,7 +27,9 @@ import { ThemeMode } from '@/types';
 import { mapNavigations, numbers } from '@/constants';
 import getMapStyle from '@/style/mapStyle';
 import useLegendStorage from '@/hooks/useLegendStorage';
-import MapLegend from '@/components/MapLegend';
+import AddPostHeaderRight from '@/components/post/AddPostHeaderRight';
+import MapLegend from '@/components/map/MapLegend';
+import MarkerModal from '@/components/map/MarkerModal';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MainStackParamList>,
@@ -237,6 +237,8 @@ function MapHomeScreen() {
     setLib(true);
   }
 
+  // console.log("2차 시도");
+  // console.log("markers", markers);
 
   return (
     <>
@@ -259,15 +261,18 @@ function MapHomeScreen() {
           ...numbers.INITIAL_DELTA
         }}
       >
-        {markers.map(({id, color, score, symbol, ...coordinate})=>(
-          <CustomMarker 
-            key={id} 
-            color={color} 
-            score={score} 
-            symbol='string'
-            coordinate={coordinate}
-            onPress={()=>handlePressMarker(id, coordinate)}
-          />
+
+        {/* <Marker key={markers[0].id} coordinate={{latitude: markers[0].latitude, longitude: markers[0].longitude}} /> */}
+        {/* si,gu,dong,address,title,age,area,category,payment, price, rent */}
+        {markers.map(({id,  ...coordinate})=>(
+            <CustomMarker key={id} coordinate={{latitude: coordinate.latitude, longitude: coordinate.longitude}} 
+              category='location-pin' onPress={()=>handlePressMarker(id, coordinate)}/>
+          
+          // <CustomMarker 
+          //   key={id}
+          //   coordinate={coordinate}
+          //   onPress={()=>handlePressMarker(id, coordinate)}
+          // />
         ))}
         
         {selectLocation && (
@@ -278,33 +283,30 @@ function MapHomeScreen() {
 
         {!bus && (
           <CustomMarker 
-          color="GREEN"
-          symbol="BUS_STOP"
-          coordinate={{
-          latitude: 37.56567832802507,
-          longitude: 126.99890077114104,
-          }}
-      />
+            coordinate={{
+            latitude: 37.56567832802507,
+            longitude: 126.99890077114104
+            }}
+            category='directions-bus'
+          />
         )}
 
       {!bus && (
           <CustomMarker 
-          color="GREEN"
-          symbol="BUS_STOP"
-          coordinate={{
+            coordinate={{
               latitude: 37.56506043742343,
               longitude: 126.99591815471649}}
-            />
+              category='directions-bus'
+          />
         )}
 
-{!bus && (
+      {!bus && (
           <CustomMarker 
-          color="GREEN"
-          symbol="BUS_STOP"
           coordinate={{
-              latitude: 37.56122222539861,
-              longitude: 126.99936579912902}}
-            />
+            latitude: 37.56122222539861,
+            longitude: 126.99936579912902}} 
+              category='directions-bus'
+          />
         )}
 
       </MapView>

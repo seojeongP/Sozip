@@ -1,6 +1,6 @@
-import Pagination from '@/components/Pagination';
-import SearchInput from '@/components/SearchInput';
-import SearchRegionResult from '@/components/SearchRegionResult';
+import Pagination from '@/components/common/Pagination';
+import SearchInput from '@/components/common/SearchInput';
+import SearchRegionResult from '@/components/map/SearchRegionResult';
 import useSearchLocation from '@/hooks/useSearchLocation';
 import useUserLocation from '@/hooks/useUserLocation';
 import React, { useState } from 'react';

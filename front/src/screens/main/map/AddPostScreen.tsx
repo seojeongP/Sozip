@@ -1,5 +1,6 @@
-import AddPostHeaderRight from '@/components/AddPostHeaderRight';
-import InputField from '@/components/InputField';
+
+import InputField from '@/components/common/InputField';
+import AddPostHeaderRight from '@/components/post/AddPostHeaderRight';
 import { colors, mapNavigations } from '@/constants';
 import useMutateCreatePost from '@/hooks/queries/useMutateCreatePost';
 import useForm from '@/hooks/useForm';
@@ -22,23 +23,20 @@ function AddPostScreen({route, navigation}: AddPostScreenProps) {
   const descriptionRef = useRef<TextInput | null>(null);
   const createPost = useMutateCreatePost();
 
+  console.log('location', location);
+
   const addPost = useForm({
     initialValue: {title: '', description: ''},
     validate: validateAddPost,
   });
 
-  const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
-  const [score, setScore] = useState(5);
+  // const [markerColor, setMarkerColor] = useState<MarkerColor>('RED');
+  // const [score, setScore] = useState(5);
   const address = useGetAddress(location);
 
   const handleSubmit = () => {
     const body = {
-      date: new Date(),
       title: addPost.values.title,
-      description: addPost.values.description,
-      color: markerColor,
-      score,
-      symbol: '',
       imageUris:[],
     };
     //mutate 함수에 들어가는 것은 전송될 body 정보임

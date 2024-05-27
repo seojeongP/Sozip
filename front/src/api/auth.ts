@@ -10,9 +10,13 @@ type RequestUser = {
 
 // Email과 password를 넘김
 const postSignup = async({email, password}: RequestUser): Promise<void> => {
-    const {data} = await axiosInstance.post('/auth/signup', {email, password});
+    try {
+        const {data} = await axiosInstance.post('/auth/signup', {email, password});
 
-    return data;
+        return data;
+    } catch (error) {
+        console.log('error(signup)', error);
+    }
 };
 
 type ResponseToken = {

@@ -1,5 +1,5 @@
-import FeedFavoriteList from '@/components/FeedFavoriteList';
-import FeedList from '@/components/FeedList';
+import FeedFavoriteList from '@/components/feed/FeedFavoriteList';
+import FeedList from '@/components/feed/FeedList';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import React, { useCallback, useMemo, useRef } from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';

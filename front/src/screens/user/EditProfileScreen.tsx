@@ -1,6 +1,6 @@
-import EditProfileHeaderRight from '@/components/EditProfileHeaderRight';
-import EditProfileImageOption from '@/components/EditProfileImageOption';
-import InputField from '@/components/InputField';
+import InputField from '@/components/common/InputField';
+import EditProfileHeaderRight from '@/components/setting/EditProfileHeaderRight';
+import EditProfileImageOption from '@/components/setting/EditProfileImageOption';
 import {colors, settingNavigations} from '@/constants';
 import { errorMessages } from '@/constants/messages';
 import useAuth from '@/hooks/queries/useAuth';

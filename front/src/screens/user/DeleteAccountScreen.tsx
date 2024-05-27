@@ -1,5 +1,5 @@
 import { deleteAccount } from '@/api';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { colors } from '@/constants';
 import { alerts, errorMessages } from '@/constants/messages';
 import useAuth from '@/hooks/queries/useAuth';

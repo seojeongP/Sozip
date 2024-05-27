@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, SafeAreaView, StyleSheet, View, Image, Dimensions, Pressable, Text} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { authNavigations, colors } from '@/constants';
 import { AuthStackParamList } from '@/navigations/stack/AuthStackNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';

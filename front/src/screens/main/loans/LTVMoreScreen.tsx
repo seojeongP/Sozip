@@ -1,4 +1,4 @@
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { colors, loanNavigations } from '@/constants';
 import { LoanStackParamList } from '@/navigations/stack/LoanStackNavigator';
 import useThemeStore from '@/store/useThemStore';

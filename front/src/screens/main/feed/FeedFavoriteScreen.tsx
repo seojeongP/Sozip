@@ -1,4 +1,5 @@
-import FeedFavoriteList from '@/components/FeedFavoriteList';
+
+import FeedFavoriteList from '@/components/feed/FeedFavoriteList';
 import { colors } from '@/constants';
 import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';

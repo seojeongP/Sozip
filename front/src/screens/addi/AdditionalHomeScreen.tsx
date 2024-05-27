@@ -1,4 +1,4 @@
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { addiNavigations } from '@/constants';
 import { AddiStackParamList } from '@/navigations/stack/AddtionalStackNavigator';
 import { StackScreenProps } from '@react-navigation/stack';

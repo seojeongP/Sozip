@@ -22,6 +22,7 @@ function CustomImageButton({
 }: CustomImageButtonProps) {
     const {theme} = useThemeStore();
     const styles = styling(theme);
+    
   return (
     <Pressable
         disabled={inValid} 

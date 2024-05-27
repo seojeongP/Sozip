@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 import {feedNavigations} from '@/constants';
 import {FeedStackParamList} from '@/navigations/stack/FeedStackNavigator';
-import ImageCarousel from '@/components/ImageCarousel';
+import ImageCarousel from '@/components/common/ImageCarousel';
 import useDetailPostStore from '@/store/useDetailPostStore';
 
 type ImageZoomScreenProps = StackScreenProps<

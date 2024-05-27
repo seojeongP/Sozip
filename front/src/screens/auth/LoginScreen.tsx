@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateLogin } from '@/utils';
-import InputField from '@/components/InputField';
 import useAuth from '@/hooks/queries/useAuth';
 import useForm from '@/hooks/useForm';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import Toast from 'react-native-toast-message';
 import { errorMessages } from '@/constants/messages';
+import InputField from '@/components/common/InputField';
 
 function LoginScreen() {
   const passwordRef = useRef<TextInput | null>(null);

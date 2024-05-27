@@ -1,5 +1,5 @@
-import DarkModeOption from '@/components/DarkModeOption';
-import MapLegendOption from '@/components/MapLegendOption';
+import MapLegendOption from '@/components/map/MapLegendOption';
+import DarkModeOption from '@/components/setting/DarkModeOption';
 import { colors, settingNavigations } from '@/constants';
 import useAuth from '@/hooks/queries/useAuth';
 import useModal from '@/hooks/useModal';

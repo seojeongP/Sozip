@@ -1,4 +1,4 @@
-import InputField from '@/components/InputField';
+
 import { colorHex, colors } from '@/constants';
 import useAuth from '@/hooks/queries/useAuth';
 import useForm from '@/hooks/useForm';
@@ -13,6 +13,7 @@ import EditCategoryHeaderRight from './EditCategoryHeaderRight';
 import Toast from 'react-native-toast-message';
 import { errorMessages } from '@/constants/messages';
 import useThemeStore from '@/store/useThemStore';
+import InputField from '@/components/common/InputField';
 
 const categoryList: MarkerColor[] = [
     'RED',

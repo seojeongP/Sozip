@@ -1,5 +1,5 @@
-import CustomButton from '@/components/CustomButton';
-import PreviewImageList from '@/components/PreviewImageList';
+import CustomButton from '@/components/common/CustomButton';
+import PreviewImageList from '@/components/common/PreviewImageList';
 import { colors, feedNavigations, mainNavigations, mapNavigations } from '@/constants';
 import useGetPost from '@/hooks/queries/useGetPost';
 import useMutateFavoritePost from '@/hooks/queries/useMutateFavoritePost';
@@ -24,6 +24,7 @@ type FeedDetailScreenProps = CompositeScreenProps<
 const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
     const {theme} = useThemeStore();
     const styles = styling(theme);
+
     const {id} = route.params;
     //post 정보 받아옴
     const {data: post, isPending, isError} = useGetPost(id);
@@ -83,7 +84,7 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
           </View>
 
           <Text style={styles.titleText}>{post.title}</Text>
-          <Text style={styles.descriptionText}>{post.description}</Text>
+          <Text style={styles.descriptionText}>{post.address}</Text>
       </View>
 
       {post.images.length > 0 && (

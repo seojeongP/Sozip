@@ -7,7 +7,7 @@ import { colors } from '@/constants';
 import { feedNavigations } from '@/constants/navigations';
 import FeedHomeScreen from '@/screens/main/feed/FeedHomeScreen';
 import FeedDetailScreen from '@/screens/main/feed/FeedDetailScreen';
-import FeedHomeHeaderLeft from '@/components/FeedHomeHeaderLeft';
+import FeedHomeHeaderLeft from '@/components/feed/FeedHomeHeaderLeft';
 import ImageZoomScreen from '@/screens/main/feed/ImageZoomScreen';
 import FeedFavoriteScreen from '@/screens/main/feed/FeedFavoriteScreen';
 import AnalysisScreen from '@/screens/main/feed/AnalysisScreen';

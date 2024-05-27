@@ -1,4 +1,4 @@
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import { colors, loanNavigations } from '@/constants';
 import { LoanStackParamList } from '@/navigations/stack/LoanStackNavigator';
 import useThemeStore from '@/store/useThemStore';
@@ -40,13 +40,16 @@ function LTVHomeScreen({navigation}: LTVHomeScreenProps) {
       <View style={styles.container}>
         <Image style={styles.back} source={require('../../../assets/back_loan.png')}/>
 
-        <ScrollView>
+        
         <View style={styles.description}>
           <Text style={styles.textTitle}>담보인정비율(LTV) 계산</Text>
           <Text style={{fontSize:12,}}>LTV(Loan to Value: 담보인정비율)은 담보 대비 대출금액의 비율을 나타내는 지표로, 주로 주택담보대출의 대출가능금액을 산출할 때 사용됩니다.</Text>
           <Text style={{fontSize:12,}}>LTV 기준비율은 지역에 따라 다르며, 20~70% 수준입니다. 아래 '지역별 LTV 기준'에서 확인할 수 있습니다.</Text>
         </View>
 
+        <View style={{borderTopColor: colors[theme].GRAY_500, borderTopWidth: 1, marginBottom:10,}}></View>
+
+        <ScrollView>
         <View style={styles.buttonList}>
           <View style={styles.detailedButton}>
             <TouchableOpacity

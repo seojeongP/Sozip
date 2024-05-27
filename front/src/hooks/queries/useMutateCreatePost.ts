@@ -20,9 +20,6 @@ function useMutateCreatePost(mutationOptions?: UseMutationCustomOptions){
                   id: newPost.id,
                   latitude: newPost.latitude,
                   longitude: newPost.longitude,
-                  color: newPost.color,
-                  score: newPost.score,
-                  symbol: newPost.symbol,
                 };
       
                 return existingMarkers

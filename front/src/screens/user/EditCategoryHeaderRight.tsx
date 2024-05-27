@@ -1,4 +1,4 @@
-import HeaderButton from '@/components/HeaderButton';
+import HeaderButton from '@/components/common/HeaderButton';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 

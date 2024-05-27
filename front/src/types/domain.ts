@@ -15,16 +15,12 @@ interface Marker {
   id: number;
   latitude: number;
   longitude: number;
-  color: MarkerColor;
-  score: number;
-  symbol: string;
+  // which: string;
 }
 
 interface Post extends Marker {
   title: string;
   address: string;
-  date: Date | string;
-  description: string;
 }
 
 interface Profile {

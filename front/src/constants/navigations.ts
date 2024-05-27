@@ -39,6 +39,9 @@ const loanNavigations = {
     LOAN_HOME: 'LoanHome',
     LTV_HOME: 'LTVHome',
     VERIFY: 'VerifyHome',
+    BANK_SELECTION: 'BankSelection',
+    BANK_ITEM_LIST: 'BankItemList',
+    BANK_ITEM_DETAIL: 'BankItemDetail',
     LTV_RESULT: 'LTVResult',
     LTV_MORE: 'LTVMore',
 } as const;

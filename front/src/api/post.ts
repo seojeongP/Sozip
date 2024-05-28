@@ -22,6 +22,7 @@ type ResponseSinglePost = ResponsePost & {isFavorite: boolean};
 
 const getPost = async(id:number): Promise<ResponseSinglePost> => {
     const {data} = await axiosInstance.get(`/posts/${id}`);
+    console.log("data", data);
 
     return data;
 };

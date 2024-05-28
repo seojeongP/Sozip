@@ -4,6 +4,8 @@ const queryKeys = {
     GET_PROFILE: ' getProfile',
     MARKER: 'marker',
     GET_MARKERS: 'getMarkers',
+    BUS: 'bus',
+    GET_BUSES: 'getBuses',
     POST: 'post',
     GET_POST: 'getPost',
     GET_POSTS: 'getPosts',

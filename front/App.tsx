@@ -18,6 +18,7 @@ import queryClient from './src/api/queryClient';
 import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
 import { colors } from '@/constants';
 import useThemeStore from '@/store/useThemStore';
+import 'react-native-svg'
 
 const toastConfig = {
   success: (props:BaseToastProps) => (

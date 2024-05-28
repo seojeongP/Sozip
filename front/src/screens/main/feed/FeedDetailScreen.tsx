@@ -14,6 +14,7 @@ import React from 'react';
 import {Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 type FeedDetailScreenProps = CompositeScreenProps<
@@ -31,18 +32,23 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
     const favoriteMutation = useMutateFavoritePost();
     const insets = useSafeAreaInsets();
     const {setMoveLocation} = useLocationStore()
-    
+
+    console.log("isPending", isPending);
+    console.log("isError", isError);
+
     if(isPending || isError){
         return <><Text>매물 상세보기</Text></>
     }
 
     const handlePressLocation = () => {
       const {latitude, longitude} = post;
+
       setMoveLocation({latitude, longitude});
-      navigation.navigate(mainNavigations.MAP, {
-        screen: mapNavigations.MAP_HOME,
-      });
-    };
+        navigation.navigate(mainNavigations.MAP, {
+          screen: mapNavigations.MAP_HOME,
+        });
+      };
+
 
     const handleAnalysis = () => {
       navigation.navigate(feedNavigations.ANALYSIS, {id})
@@ -51,6 +57,8 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
     const handlePressFavorite = () => {
       favoriteMutation.mutate(post.id);
     }
+
+    const dividedArea = (post.area / 3.3058).toFixed(2);
 
   return (
     <>
@@ -73,19 +81,140 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
         </View>
 
         <View style={styles.contentsContainer}>
+
+          <Text style={styles.titleText}>{post.title}</Text>
+
+          
+          <Pressable onPress={handlePressLocation}>
           <View style={styles.addressContainer}>
-            <Octicons name="location" size={10} color={colors[theme].GRAY_500} />
+            <Octicons name="location" size={20} color={colors[theme].GRAY_700} />
+            <Text
+              style={styles.addressText}
+              ellipsizeMode="tail">
+              {post.si}
+            </Text>
+            <Text
+              style={styles.addressText}
+              ellipsizeMode="tail">
+              {post.gu}
+            </Text>
+            <Text
+              style={styles.addressText}
+              ellipsizeMode="tail">
+              {post.dong}
+            </Text>
             <Text
               style={styles.addressText}
               ellipsizeMode="tail"
               numberOfLines={1}>
               {post.address}
             </Text>
+            </View>
+            </Pressable>
+          
+          
+
+          <View style={styles.descriptionContainer}>
+            <View style={{flexDirection: 'row', gap: 20,}}>
+              <Ionicons name="wallet" size={25} color={colors[theme].UNCHANGE_BLACK} />
+              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600',}}>거래가</Text>
+            </View>
+            <View style={styles.descriptionDetailContainer}>
+            <Text style={[styles.descriptionText, {fontWeight: '700'}]}>
+              {post.payment=='ws'? '월세' : post.payment=='js'?'전세':'매매'}
+            </Text>
+            <Text style={styles.descriptionText}>
+              {post.price} 만원
+            </Text>
+            <Text style={styles.descriptionText}>
+              / {post.payment=='ws'? post.rent : ''} 
+            </Text>
+            </View>
           </View>
 
-          <Text style={styles.titleText}>{post.title}</Text>
-          <Text style={styles.descriptionText}>{post.address}</Text>
+          <View style={styles.descriptionContainer}>
+          <View style={{flexDirection: 'row', gap: 20,}}>
+              <Ionicons name="resize" size={25} color={colors[theme].UNCHANGE_BLACK} />
+              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600',}}>전용면적</Text>
+            </View>
+            <Text style={styles.descriptionText}>
+              {post.area} m{'\xB2'} / {dividedArea} 평
+            </Text>
+          </View>
+
+
+          <Text style={[styles.descriptionText, {marginTop: 30 ,fontSize: 25, fontWeight: '700'}]}>주변 시설 정보</Text>
+      
+          <View style={styles.tableContainer}>
+            <View style={[styles.oneRow]}>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>주변 시설</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>가장 가까운 시설 정보</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>거리(m)</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>버스 정류장</Text></View>
+              <View style={styles.oneBlock}><Text>{post.bus}</Text></View>
+              <View style={styles.oneBlock}><Text>{post.dis_bus}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>지하철역</Text></View>
+              <View style={styles.oneBlock}><Text>{post.metro}</Text></View>
+              <View style={styles.oneBlock}><Text>{post.dis_metro}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>초등학교</Text></View>
+              <View style={styles.oneBlock}><Text>{post.elementary}</Text></View>
+              <View style={styles.oneBlock}><Text>{post.dis_elementary}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>중학교</Text></View>
+              <View style={styles.oneBlock}><Text>{post.middle}</Text></View>
+              <View style={styles.oneBlock}><Text>{post.dis_middle}</Text></View>
+            </View>
+            <View style={[styles.oneRow, {borderBottomEndRadius: 10,borderBottomStartRadius: 10,}]}>
+              <View style={styles.oneBlock}><Text>고등학교</Text></View>
+              <View style={styles.oneBlock}><Text>{post.high}</Text></View>
+              <View style={styles.oneBlock}><Text>{post.dis_high}</Text></View>
+            </View>
+          </View>
+
+          <View style={styles.tableContainer}>
+            <View style={[styles.oneRow]}>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>주변 시설 (1.3km)</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>개수</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>편의점 (300m)</Text></View>
+              <View style={styles.oneBlock}><Text>{post.conv}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>대형마트</Text></View>
+              <View style={styles.oneBlock}><Text>{post.mart}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>약국 (300m)</Text></View>
+              <View style={styles.oneBlock}><Text>{post.pharmacy}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>병원</Text></View>
+              <View style={styles.oneBlock}><Text>{post.hospital}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>공공도서관</Text></View>
+              <View style={styles.oneBlock}><Text>{post.lib}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>경찰서</Text></View>
+              <View style={styles.oneBlock}><Text>{post.police}</Text></View>
+            </View>
+            <View style={styles.oneRow}>
+              <View style={styles.oneBlock}><Text>소방서</Text></View>
+              <View style={styles.oneBlock}><Text>{post.fire}</Text></View>
+            </View>
+          </View>
       </View>
+
+
 
       {post.images.length > 0 && (
         <View style={styles.imageContentsContainer}>
@@ -155,11 +284,12 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     backgroundColor: colors[theme].WHITE,
+    gap: 10,
     // height: Dimensions.get('screen').height/2,
     // marginBottom: 10,
   },
   titleText: {
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: 'bold',
     color: colors[theme].BLACK,
   },
@@ -170,8 +300,20 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     alignItems: 'center',
   },
   addressText: {
-    color: colors[theme].GRAY_500,
-    fontSize: 12,
+    color: colors[theme].GRAY_700,
+    fontSize: 15,
+  },
+  descriptionContainer: {
+    gap: 5,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  descriptionDetailContainer: {
+    flexDirection: 'row',
+    gap: 5,
   },
   descriptionText: {
     color: colors[theme].BLACK,
@@ -211,6 +353,28 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: colors[theme].WHITE,
     marginBottom: 10,
+  },
+  tableContainer: {
+    flex: 5,
+    margin: 5,
+    gap: 10,
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: colors[theme].GRAY_700,
+    borderRadius: 10,
+  },
+  oneRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 5,
+    borderBottomColor: colors[theme].GRAY_700,
+    borderBottomWidth: 0.7,
+  },
+  oneBlock: {
+    // borderRightColor: colors[theme].GRAY_700,
+    // borderRightWidth: 0.7,
   },
 });
 

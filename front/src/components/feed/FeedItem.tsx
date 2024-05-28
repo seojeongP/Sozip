@@ -29,6 +29,8 @@ function FeedItem({post}: FeedItemProps) {
         navigation.navigate(feedNavigations.FEED_DETAIL, {id: post.id})
     };
 
+    console.log('post.isFavorite', post.isFavorite);
+
     const handlePressFavorite = () => {
       favoriteMutation.mutate(post.id);
       
@@ -60,8 +62,8 @@ function FeedItem({post}: FeedItemProps) {
           <Octicons 
             name='heart-fill' 
             size={30} 
-            // color={post.isFavorite ? colors[theme].PINK_700 : colors[theme].GRAY_400}/>
-            color={colors[theme].GRAY_400}/>
+            color={post.isFavorite ? colors[theme].PINK_700 : colors[theme].GRAY_400}/>
+            {/* color={colors[theme].GRAY_400}/> */}
         </Pressable>
         </View>
     </Pressable>

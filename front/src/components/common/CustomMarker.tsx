@@ -29,7 +29,11 @@ function CustomMarker({coordinate, category='location-pin', ...props}: CustomMar
     <Marker coordinate={coordinate} {...props}>
         <View style={styles.container}>
             {/* <View style={[styles.marker, {backgroundColor: colorHex[color]}]}> */}
-                <MaterialIcons name={category} color={colors[theme].BLACK} size={25}/>
+                <MaterialIcons 
+                        name={category} 
+                        color={category==='directions-bus' ? colors[theme].BLUE_MAIN: colors[theme].GRAY_700}
+                        size={25}
+                />
             {/* </View> */}
         </View>
     </Marker>

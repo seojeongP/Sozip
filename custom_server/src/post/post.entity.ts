@@ -66,6 +66,75 @@ export class Post extends BaseEntity {
   rent: number;
 
   @Column()
+  bus: string;
+
+  @Column({
+    type: 'decimal',
+    transformer: new ColumnNumericTransformer(),
+  })
+  dis_bus: number;
+
+  @Column()
+  metro: string;
+
+  @Column({
+    type: 'decimal',
+    transformer: new ColumnNumericTransformer(),
+  })
+  dis_metro: number;
+
+  @Column()
+  elementary: string;
+
+  @Column({
+    type: 'decimal',
+    transformer: new ColumnNumericTransformer(),
+  })
+  dis_elementary: number;
+
+  @Column()
+  middle: string;
+
+  @Column({
+    type: 'decimal',
+    transformer: new ColumnNumericTransformer(),
+  })
+  dis_middle: number;
+
+  @Column()
+  high: string;
+
+  @Column({
+    type: 'decimal',
+    transformer: new ColumnNumericTransformer(),
+  })
+  dis_high: number;
+
+  @Column()
+  pharmacy: number;
+
+  @Column()
+  hospital: number;
+
+  @Column()
+  fire: number;
+
+  @Column()
+  police: number;
+
+  @Column()
+  conv: number;
+
+  @Column()
+  mart: number;
+
+  @Column()
+  lib: number;
+
+
+
+
+  @Column()
   userId: number;
 
   @ManyToOne(() => User, (user) => user.post, { eager: false })

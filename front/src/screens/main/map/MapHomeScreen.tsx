@@ -30,6 +30,7 @@ import useLegendStorage from '@/hooks/useLegendStorage';
 import AddPostHeaderRight from '@/components/post/AddPostHeaderRight';
 import MapLegend from '@/components/map/MapLegend';
 import MarkerModal from '@/components/map/MarkerModal';
+import useGetBuses from '@/hooks/queries/useGetBuses';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MainStackParamList>,
@@ -39,8 +40,7 @@ type Navigation = CompositeNavigationProp<
 function MapHomeScreen() {
   const {theme} = useThemeStore();
   const styles = styling(theme);
-  const [option, setOption] = useState<Boolean>(false);
-  const [listShown, setListShown] = useState<Boolean>(false);
+
   const legend = useLegendStorage();
 
   // ref
@@ -71,22 +71,23 @@ function MapHomeScreen() {
   const inset = useSafeAreaInsets();
 
   const navigation = useNavigation<Navigation>();
-  const {logoutMutation} = useAuth();
   const {userLocation, isUserLocationError} = useUserLocation();
   const {selectLocation, setSelectLocation} = useLocationStore();
   const {data:markers = []} = useGetMarkers();
+  const {data:buses = []} = useGetBuses();
   const [markerId, setMarkerId] = useState<number|null>(null);
   const {mapRef, moveMapView, hadleChangeDelta} = useMoveMapView();
 
   const [apart, setApart] = useState<Boolean>(true);
-  const [month, setMonth] = useState<Boolean>(true);
+  const [villa, setVilla] = useState<Boolean>(true);
 
-  const [isOption, setIsOptions] = useState<Boolean>(false);
+  const [deposit, setDeposit] = useState<Boolean>(true);
+  const [month, setMonth] = useState<Boolean>(true);
+  const [mm, setMm] = useState<Boolean>(true);
 
   const [elementary, setElementary] = useState<Boolean>(true);
   const [middle, setMiddle] = useState<Boolean>(true);
   const [high, setHigh] = useState<Boolean>(true);
-
   const [bus, setBus] = useState<Boolean>(true);
   const [metro, setMetro] = useState<Boolean>(true);
 
@@ -95,12 +96,37 @@ function MapHomeScreen() {
   const [mart, setMart] = useState<Boolean>(true);
   const [hospi, setHospi] = useState<Boolean>(true);
   const [lib, setLib] = useState<Boolean>(true);
+  const [police, setPolice] = useState<Boolean>(true);
+  const [fire, setFire] = useState<Boolean>(true);
+
 
   const markerModal = useModal();
   // usePermission();
 
-  const handleLogout = () => {
-    logoutMutation.mutate(null);
+  console.log("왜 못 받아와");
+  // console.log("markers", markers);
+  // console.log('buses[3].latitude' , buses[3].latitude);
+
+  //매물 마커 필터링
+  const filterMarkers = (markers: any[], apart: Boolean, villa: Boolean, mm: Boolean, month: Boolean, deposit: Boolean) => {
+    return markers.filter(marker => {
+      // Category 필터링 조건
+      const categoryCondition = apart && villa ? 
+        (marker.category === 'apart' || marker.category === 'villa') :
+        apart ? marker.category === 'apart' :
+        villa ? marker.category === 'villa' :
+        false;
+  
+      // Payment 필터링 조건
+      const paymentCondition = mm || month || deposit ? 
+        (mm && marker.payment === 'mm') || 
+        (month && marker.payment === 'ws') || 
+        (deposit && marker.payment === 'js') :
+        true;
+  
+      // 두 조건을 모두 만족해야 함
+      return categoryCondition && paymentCondition;
+    });
   };
 
   const handleLongPressMapView = ({nativeEvent}: LongPressEvent) => {
@@ -147,68 +173,26 @@ function MapHomeScreen() {
     // });
   };
 
-  const handlePressApart = () => {
-    setApart(!apart);
-    console.log('apart',apart);
-  }
-
-  const handlePressMonth = () => {
-    setMonth(!month);
-    console.log('month',month);
-  }
-
-  const handlePressShowList = () => {
-    console.log(selectLocation)
-  }
-
-  const handlePressElementary = () => {
-    setElementary(!elementary);
-    console.log('elementary',elementary);
-  }
-
-  const handlePressMiddle = () => {
-    setMiddle(!middle);
-    console.log('middle',middle);
-  }
-
-  const handlePressHigh = () => {
-    setHigh(!high);
-    console.log('high',high);
-  }
-
-  const handlePressBus = () => {
-    setBus(!bus);
-    console.log('bus',bus);
-  }
-
-  const handlePressMetro = () => {
-    setMetro(!metro);
-    console.log('metro',metro);
-  }
-
-  const handlePressPhar = () => {
-    setPhar(!phar);
-    console.log('phar',phar);
-  }
-
-  const handlePressMart = () => {
-    setMart(!mart);
-    console.log('mart',mart);
-  }
-
-  const handlePressConvi = () => {
-    setConvi(!convi);
-    console.log('convi',convi);
-  }
-
-  const handlePressHospi = () => {
-    setHospi(!hospi);
-    console.log('hospi',hospi);
-  }
-
-  const handlePressLib = () => {
-    setLib(!lib);
-    console.log('lib',lib);
+  const handlePressWhat = (what: string) => {
+    switch (what){
+      case "apart": setApart(!apart); console.log('apart', apart); break;
+      case "villa": setVilla(!villa); break;
+      case "deposit": setDeposit(!deposit); break;
+      case "month": setMonth(!month); break;
+      case "mm": setMm(!mm); break;
+      case "elementary": setElementary(!elementary); break;
+      case "middle": setMiddle(!middle); break;
+      case "high": setHigh(!high); break;
+      case "bus": setBus(!bus); console.log('bus', bus); break;
+      case "metro": setMetro(!metro); break;
+      case "phar": setPhar(!phar); break;
+      case "convi": setConvi(!convi); break;
+      case "hospi": setHospi(!hospi); break;
+      case "mart": setMart(!mart); break;
+      case "lib": setLib(!lib); break;
+      case "police": setPolice(!police); break;
+      case "fire": setFire(!fire); break;
+    }
   }
 
   useEffect(()=> {
@@ -216,12 +200,6 @@ function MapHomeScreen() {
       headerRight: ()=> AddPostHeaderRight("내 정보", handleSubmit),
     });
   });
-
-
-  const hadleReset_2 = () => {
-    setApart(true);
-    setMonth(true);
-  }
 
 
   const hadleReset = () => {
@@ -237,8 +215,15 @@ function MapHomeScreen() {
     setLib(true);
   }
 
-  // console.log("2차 시도");
-  // console.log("markers", markers);
+  const hadleReset_2 = () => {
+    setApart(true);
+    setVilla(true);
+    setMm(true);
+    setMonth(true);
+    setDeposit(true);
+  }
+
+  const filteredMarkers = filterMarkers(markers, !apart, !villa, !mm, !month, !deposit);
 
   return (
     <>
@@ -261,54 +246,34 @@ function MapHomeScreen() {
           ...numbers.INITIAL_DELTA
         }}
       >
+      
+        {/* <CustomMarker key={buses[3].id} coordinate={{latitude: buses[3].latitude, longitude: buses[3].longitude}} category='location-pin'/> */}
+        {/* <CustomMarker key={markers[3].id} 
+        coordinate={{latitude: markers[3].latitude, longitude: markers[3].longitude}}
+        category='location-pin'/>  */}
 
-        {/* <Marker key={markers[0].id} coordinate={{latitude: markers[0].latitude, longitude: markers[0].longitude}} /> */}
-        {/* si,gu,dong,address,title,age,area,category,payment, price, rent */}
-        {markers.map(({id,  ...coordinate})=>(
-            <CustomMarker key={id} coordinate={{latitude: coordinate.latitude, longitude: coordinate.longitude}} 
-              category='location-pin' onPress={()=>handlePressMarker(id, coordinate)}/>
-          
-          // <CustomMarker 
-          //   key={id}
-          //   coordinate={coordinate}
-          //   onPress={()=>handlePressMarker(id, coordinate)}
-          // />
-        ))}
-        
-        {selectLocation && (
-          <Callout>
-            <Marker coordinate={selectLocation} />
-          </Callout>
-        )}
-
-        {!bus && (
-          <CustomMarker 
-            coordinate={{
-            latitude: 37.56567832802507,
-            longitude: 126.99890077114104
-            }}
-            category='directions-bus'
-          />
-        )}
-
-      {!bus && (
-          <CustomMarker 
-            coordinate={{
-              latitude: 37.56506043742343,
-              longitude: 126.99591815471649}}
+      {!bus && buses.map(({id, which, ...coordinate})=>(
+            <CustomMarker 
+              key={id} 
+              coordinate={coordinate} 
               category='directions-bus'
-          />
-        )}
+            />
+        ))} 
 
-      {!bus && (
-          <CustomMarker 
-          coordinate={{
-            latitude: 37.56122222539861,
-            longitude: 126.99936579912902}} 
-              category='directions-bus'
-          />
-        )}
-
+      {filteredMarkers.map(({id, category, payment, ...coordinate})  => (
+        <CustomMarker
+          key={id}
+          coordinate={{ latitude: coordinate.latitude, longitude: coordinate.longitude }}
+          category='location-pin'
+          onPress={() => handlePressMarker(id, coordinate)}
+        />
+      ))}
+  
+      {selectLocation && (
+        <Callout>
+          <Marker coordinate={selectLocation} />
+        </Callout>
+      )}
       </MapView>
 
       <View style={styles.mainButton}>
@@ -331,92 +296,14 @@ function MapHomeScreen() {
       </View>
 
       <BottomSheetModalProvider>
-      <View style={styles.bottomPriceContainer}>
-        <View style={styles.bottomSheet}>
-          <TouchableOpacity
-            style={[{width: "50%", margin: 10, top:10, },
-              (!apart||!month)? styles.conditionSeletedButton: styles.conditionOptionButton]}
-            onPress={() => handlePresentPricePress()}>
-              <View style={{flexDirection:'row', alignItems: 'stretch'}}>
-                <Text style={(!apart||!month)? styles.conditionSeletedButtonText:styles.conditionButtonText}>거래</Text>
-                <MaterialIcons style={{left:8, fontSize:15, color:colors[theme].GRAY_700}} name='keyboard-arrow-down'></MaterialIcons>
-              </View>
-          </TouchableOpacity>
-        </View>
-
-        <BottomSheetModal
-          ref={bottomSheetPriceRef}
-          index={1}
-          backdropComponent={renderBackdrop}
-          snapPoints={snapPoints}
-          onChange={handleSheetChanges}
-        >
-          <View style={{padding:3}}>
-          <View style={styles.contentOptionContainer}>
-            <ScrollView>
-            <View style={{gap: 10}}>
-            <Text style={styles.optionTitle}>주거 형태</Text>
-            <View style={styles.optionList}>
-              <TouchableOpacity
-                style={apart? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressApart()}>
-                <Text style={apart? styles.buttonText:styles.seletedButtonText}>아파트</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={true? styles.optionButton:styles.seletedButton}>
-                <Text style={true? styles.buttonText:styles.seletedButtonText}>빌라</Text>
-              </TouchableOpacity>
-              </View>
-              </View>
-              
-              <View style={{gap: 10}}>
-              <Text style={styles.optionTitle}>거래 방식</Text>
-            <View style={styles.optionList}>
-              <TouchableOpacity
-                style={month? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressMonth()}>
-                <Text style={month? styles.buttonText:styles.seletedButtonText}>월세</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={true? styles.optionButton:styles.seletedButton}>
-                <Text style={true? styles.buttonText:styles.seletedButtonText}>전세</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={true? styles.optionButton:styles.seletedButton}>
-                <Text style={true? styles.buttonText:styles.seletedButtonText}>매매</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={true? styles.optionButton:styles.seletedButton}>
-                <Text style={true? styles.buttonText:styles.seletedButtonText}>단기임대</Text>
-              </TouchableOpacity>
-            </View>
-            </View>
-            </ScrollView>
-          </View>
-
-          <View style={{backgroundColor: colors[theme].WHITE, flexDirection:'row', justifyContent:'space-around', bottom:1, gap:40, margin:60}}>
-            <CustomButton label='초기화' size='medium' variant="outlined" onPress={hadleReset_2}/>
-            <CustomButton label='필터 적용' size='medium' variant="filled"/>
-          </View>
-          </View>
-        </BottomSheetModal>
-      </View>
-    </BottomSheetModalProvider>
-
-
-
-
-
-
-      <BottomSheetModalProvider>
       <View style={styles.bottomConditionContainer}>
         <View style={styles.bottomSheet}>
           <TouchableOpacity
             style={[{width: "50%", margin:10, top:10, },
-              (!bus||!elementary||!middle||!high)? styles.conditionSeletedButton: styles.conditionOptionButton]}
+              (bus||elementary||middle||high)? styles.conditionSeletedButton: styles.conditionOptionButton]}
             onPress={() => handlePresentModalPress()}>
               <View style={{flexDirection:'row', alignItems: 'stretch'}}>
-                <Text style={(!bus||!elementary||!middle||!high)? styles.conditionSeletedButtonText:styles.conditionButtonText}>세부 조건</Text>
+                <Text style={(bus||elementary||middle||high)? styles.conditionSeletedButtonText:styles.conditionButtonText}>세부 조건</Text>
                 <MaterialIcons style={{left:8, fontSize:15, color:colors[theme].GRAY_700}} name='keyboard-arrow-down'></MaterialIcons>
               </View>
           </TouchableOpacity>
@@ -438,17 +325,17 @@ function MapHomeScreen() {
             <View style={styles.optionList}>
               <TouchableOpacity
                 style={elementary? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressElementary()}>
+                onPress={() => handlePressWhat("elementary")}>
                 <Text style={elementary? styles.buttonText:styles.seletedButtonText}>초등학교</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={middle? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressMiddle()}>
+                onPress={() => handlePressWhat("middle")}>
                 <Text style={middle? styles.buttonText:styles.seletedButtonText}>중학교</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={high? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressHigh()}>
+                onPress={() => handlePressWhat("high")}>
                 <Text style={high? styles.buttonText:styles.seletedButtonText}>고등학교</Text>
               </TouchableOpacity>
               </View>
@@ -458,13 +345,13 @@ function MapHomeScreen() {
               <Text style={styles.optionTitle}>교통</Text>
             <View style={styles.optionList}>
               <TouchableOpacity
-                style={bus? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressBus()}>
-                <Text style={bus? styles.buttonText:styles.seletedButtonText}>정류장</Text>
+                style={!bus? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("bus")}>
+                <Text style={!bus? styles.buttonText:styles.seletedButtonText}>정류장</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={metro? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressMetro()}>
+                onPress={() => handlePressWhat("metro")}>
                 <Text style={metro? styles.buttonText:styles.seletedButtonText}>지하철역</Text>
               </TouchableOpacity>
             </View>
@@ -476,27 +363,38 @@ function MapHomeScreen() {
             <View style={styles.optionList}>
               <TouchableOpacity
                 style={phar? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressPhar()}>
+                onPress={() => handlePressWhat("phar")}>
                 <Text style={phar? styles.buttonText:styles.seletedButtonText}>약국</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={convi? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressConvi()}>
+                onPress={() => handlePressWhat("convi")}>
                 <Text style={convi? styles.buttonText:styles.seletedButtonText}>편의점</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={mart? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressMart()}>
+                onPress={() => handlePressWhat("mart")}>
                 <Text style={mart? styles.buttonText:styles.seletedButtonText}>대형마트</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={hospi? styles.optionButton:styles.seletedButton}
-                onPress={() => handlePressHospi()}>
+                onPress={() => handlePressWhat("hospi")}>
                 <Text style={hospi? styles.buttonText:styles.seletedButtonText}>병원</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={true? styles.optionButton:styles.seletedButton}>
-                <Text style={true? styles.buttonText:styles.seletedButtonText}>도서관</Text>
+                style={lib? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("lib")}>
+                <Text style={lib? styles.buttonText:styles.seletedButtonText}>도서관</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={police? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("police")}>
+                <Text style={police? styles.buttonText:styles.seletedButtonText}>경찰서</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={fire? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("fire")}>
+                <Text style={fire? styles.buttonText:styles.seletedButtonText}>소방서</Text>
               </TouchableOpacity>
             </View>
             </ScrollView>
@@ -504,7 +402,7 @@ function MapHomeScreen() {
             </ScrollView>
           </View>
 
-          <View style={{backgroundColor: colors[theme].WHITE, flexDirection:'row'}}>
+          <View style={{backgroundColor: colors[theme].WHITE, flexDirection:'row', justifyContent:'space-around', bottom:1, gap:40, margin:60}}>
             <CustomButton label='초기화' size='medium' variant="outlined" onPress={hadleReset}/>
             <CustomButton label='필터 적용' size='medium' variant="filled"/>
           </View>
@@ -512,6 +410,79 @@ function MapHomeScreen() {
         </BottomSheetModal>
       </View>
     </BottomSheetModalProvider>
+
+      <BottomSheetModalProvider>
+      <View style={styles.bottomPriceContainer}>
+        <View style={styles.bottomSheet}>
+          <TouchableOpacity
+            style={[{width: "50%", margin: 10, top:10, },
+              (!apart||!month||!villa||!deposit||!mm)? styles.conditionSeletedButton: styles.conditionOptionButton]}
+            onPress={() => handlePresentPricePress()}>
+              <View style={{flexDirection:'row', alignItems: 'stretch'}}>
+                <Text style={(!apart||!month||!villa||!deposit||!mm)? styles.conditionSeletedButtonText:styles.conditionButtonText}>거래</Text>
+                <MaterialIcons style={{left:8, fontSize:15, color:colors[theme].GRAY_700}} name='keyboard-arrow-down'></MaterialIcons>
+              </View>
+          </TouchableOpacity>
+        </View>
+
+        <BottomSheetModal
+          ref={bottomSheetPriceRef}
+          index={1}
+          backdropComponent={renderBackdrop}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+        >
+          <View style={{padding:3}}>
+          <View style={styles.contentOptionContainer}>
+            <ScrollView>
+            <View style={{gap: 10}}>
+            <Text style={styles.optionTitle}>주거 형태</Text>
+            <View style={styles.optionList}>
+              <TouchableOpacity
+                style={apart? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("apart")}>
+                <Text style={apart? styles.buttonText:styles.seletedButtonText}>아파트</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={villa? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("villa")}>
+                <Text style={villa? styles.buttonText:styles.seletedButtonText}>빌라</Text>
+              </TouchableOpacity>
+              </View>
+              </View>
+              
+              <View style={{gap: 10}}>
+              <Text style={styles.optionTitle}>거래 방식</Text>
+            <View style={styles.optionList}>
+              <TouchableOpacity
+                style={month? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("month")}>
+                <Text style={month? styles.buttonText:styles.seletedButtonText}>월세</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={deposit? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("deposit")}>
+                <Text style={deposit? styles.buttonText:styles.seletedButtonText}>전세</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={mm? styles.optionButton:styles.seletedButton}
+                onPress={() => handlePressWhat("mm")}>
+                <Text style={mm? styles.buttonText:styles.seletedButtonText}>매매</Text>
+              </TouchableOpacity>
+            </View>
+            </View>
+            </ScrollView>
+          </View>
+
+          <View style={{backgroundColor: colors[theme].WHITE, flexDirection:'row', justifyContent:'space-around', bottom:1, gap:40, margin:60}}>
+            <CustomButton label='초기화' size='medium' variant="outlined" onPress={hadleReset_2}/>
+            <CustomButton label='필터 적용' size='medium' variant="filled"/>
+          </View>
+          </View>
+        </BottomSheetModal>
+      </View>
+    </BottomSheetModalProvider>
+
 
 
     <BottomSheetModalProvider>

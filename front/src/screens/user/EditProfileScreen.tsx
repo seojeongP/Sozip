@@ -127,6 +127,7 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
         touched={editProfile.touched.nickname}
         placeholder="닉네임을 입력해주세요."
       />
+
       <Pressable 
         style={styles.deleteAccountContainer}
         onPress={()=>navigation.navigate(settingNavigations.DELETE_ACCOUNT)}

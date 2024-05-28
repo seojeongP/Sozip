@@ -28,6 +28,8 @@ export class PostService {
           'post.id',
           'post.latitude',
           'post.longitude',
+          'post.category',
+          'post.payment',
         ])
         .getMany();
 

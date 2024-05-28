@@ -15,12 +15,45 @@ interface Marker {
   id: number;
   latitude: number;
   longitude: number;
-  // which: string;
+  category: string;
+  payment: string;
+}
+
+interface Bus {
+  id: number;
+  which: string;
+  latitude: number;
+  longitude: number;
 }
 
 interface Post extends Marker {
   title: string;
   address: string;
+  si: string;
+  gu: string;
+  dong: string;
+  age: number;
+  area: number;
+  price: number;
+  rent: number;
+  bus: string;
+  dis_bus: number;
+  metro: string;
+  dis_metro: number;
+  elementary: string;
+  dis_elementary: number;
+  middle: string;
+  dis_middle: number;
+  high: string;
+  dis_high: number;
+  lib: number;
+  police: number;
+  fire: number;
+  mart: number;
+  conv: number;
+  pharmacy: number;
+  hospital: number;
+  isFavorite: boolean;
 }
 
 interface Profile {
@@ -36,4 +69,4 @@ interface Profile {
   loginType: 'email' | 'kakao' | 'apple';
 }
 
-export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile}
+export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile, Bus}

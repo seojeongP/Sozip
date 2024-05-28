@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { OthersService } from './others.service';
 
-@Controller('others')
-export class OthersController {}
+@Controller()
+export class OthersController {
+    constructor(private otherService: OthersService) {}
+
+    @Get('/others/bus')
+    getAllBuses() {
+    return this.otherService.getAllBuses();
+  }
+}

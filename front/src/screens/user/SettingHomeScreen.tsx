@@ -49,31 +49,12 @@ function SettingHomeScreen({navigation}: SettingHomeScreenProps) {
             styles.subcontainer,
             pressed && styles.pressedContainer,
           ]}
-          onPress={handlePressEditCategory}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>카테고리 설정</Text>
-          </View>
-        </Pressable>
-        <Pressable
-          style={({pressed}) => [
-            styles.subcontainer,
-            pressed && styles.pressedContainer,
-          ]}
           onPress={darkModeOption.show}>
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>다크 모드</Text>
           </View>
         </Pressable>
-        <Pressable
-          style={({pressed}) => [
-            styles.subcontainer,
-            pressed && styles.pressedContainer,
-          ]}
-          onPress={mapLegendOption.show}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleText}>범례 표시</Text>
-          </View>
-        </Pressable>
+        
         <View style={styles.space} />
         <Pressable
           style={({pressed}) => [

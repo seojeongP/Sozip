@@ -3,10 +3,11 @@ import { colors, feedNavigations } from '@/constants';
 import useGetPost from '@/hooks/queries/useGetPost';
 import useMutateFavoritePost from '@/hooks/queries/useMutateFavoritePost';
 import { FeedStackParamList } from '@/navigations/stack/FeedStackNavigator';
+import { MapStackParamList } from '@/navigations/stack/MapStackNavigator';
 import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
 import { getDateWithSeparator } from '@/utils';
-import { useNavigation } from '@react-navigation/native';
+import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import {Dimensions, Image, Platform, Pressable, StyleSheet, Text, View} from 'react-native';
@@ -16,7 +17,11 @@ interface FeedItemProps {
     post: ResponsePost;
 }
 
-type Navigation = StackNavigationProp<FeedStackParamList>;
+type Navigation = CompositeNavigationProp<
+  StackNavigationProp<FeedStackParamList>,
+  StackNavigationProp<MapStackParamList>
+>;
+
 
 function FeedItem({post}: FeedItemProps) {
     const {theme} = useThemeStore();
@@ -36,7 +41,7 @@ function FeedItem({post}: FeedItemProps) {
     }
 
   return (
-    <View style={styles.shadow} >
+    <View>
     <Pressable style={styles.container} onPress={handlePressFeed}>
         <View>
             {post.images.length > 0 && (
@@ -79,7 +84,6 @@ function FeedItem({post}: FeedItemProps) {
             name='heart-fill' 
             size={30} 
             color={item?.isFavorite ? colors[theme].PINK_700 : colors[theme].GRAY_400}/>
-            {/* color={colors[theme].GRAY_400}/> */}
         </Pressable>
         </View>
     </Pressable>
@@ -88,12 +92,6 @@ function FeedItem({post}: FeedItemProps) {
 }
 
 const styling = (theme:ThemeMode) => StyleSheet.create({
-    shadow: {
-      // shadowColor: '#171717',
-      //   shadowOffset: {width: -2, height: 4},
-      //   shadowOpacity: 1,
-      //   shadowRadius: 3,
-    },
     container: {
         flex:1,
         flexDirection: 'row',
@@ -101,7 +99,13 @@ const styling = (theme:ThemeMode) => StyleSheet.create({
         padding: 5,
         marginVertical:12,
         borderWidth: 0.2,
+        borderColor: colors[theme].GRAY_700,
         borderRadius: 8,
+        backgroundColor: colors[theme].WHITE,
+        shadowColor: '#171717',
+        shadowOffset: {width: 3, height: 3},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     },
     imageContainer: {
         margin: 8,

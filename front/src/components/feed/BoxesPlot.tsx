@@ -16,13 +16,18 @@ interface BoxPlotProps {
     };
     color: string;
     my: number;
+    min_final: number;
+    max_final: number;
 }
 
-const BoxPlot = ({ width, height, data, color, my }: BoxPlotProps) => {
+const BoxesPlot = ({ width, height, data, color, my, min_final, max_final }: BoxPlotProps) => {
   const {theme} = useThemeStore();
-  
-  // 데이터 예시: { min: 10, Q1: 25, median: 50, Q3: 75, max: 90 }
-  const { min, Q1, median, Q3, max } = data;
+
+  const min = ((data.min - min_final) / (max_final - min_final)) * (height - 20) + 20;
+  const Q1 = ((data.Q1 - min_final) / (max_final - min_final)) * (height - 20) + 20;
+  const median = ((data.median - min_final) / (max_final - min_final)) * (height - 20) + 20;
+  const Q3 = ((data.Q3 - min_final) / (max_final - min_final)) * (height - 20) + 20;
+  const max = ((data.max - min_final) / (max_final - min_final)) * (height - 20) + 20;
 
   const x = width / 2;
   const boxWidth = width * 0.7;
@@ -30,15 +35,14 @@ const BoxPlot = ({ width, height, data, color, my }: BoxPlotProps) => {
 
   return (
     <View>
-      {/* <Text style={{position:'absolute',left:width/4*3+10, top:height-my-20,color: colors[theme].RED_500, fontSize: 15, fontWeight: '700'}}>상위 {Math.round(my/max*100)}%</Text> */}
       <Svg height={height} width={width}>
-        <Line x1={0} y1={height/2} x2={width} y2={height/2} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
+        {/* <Line x1={0} y1={height/2} x2={width} y2={height/2} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
         <Line x1={0} y1={height/4} x2={width} y2={height/4} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
         <Line x1={0} y1={height/4*3} x2={width} y2={height/4*3} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
         <Line x1={0} y1={height/8} x2={width} y2={height/8} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
         <Line x1={0} y1={height/8*3} x2={width} y2={height/8*3} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
         <Line x1={0} y1={height/8*5} x2={width} y2={height/8*5} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
-        <Line x1={0} y1={height/8*7} x2={width} y2={height/8*7} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/>
+        <Line x1={0} y1={height/8*7} x2={width} y2={height/8*7} stroke={colors[theme].GRAY_400} strokeWidth="1" strokeDasharray="2, 2"/> */}
         
         <Line x1={0} y1={height - my} x2={width} y2={height - my} stroke={colors[theme].RED_500} strokeWidth="2" strokeDasharray="4, 4"/>
         
@@ -60,4 +64,4 @@ const BoxPlot = ({ width, height, data, color, my }: BoxPlotProps) => {
   );
 };
 
-export default BoxPlot;
+export default BoxesPlot;

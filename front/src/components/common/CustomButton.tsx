@@ -72,12 +72,14 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         borderColor: colors[theme].BLUE_MAIN,
         borderWidth: 1,
         borderRadius: 30,
+        backgroundColor: colors[theme].GRAY_200,
     },
     filledPressedrec: {
         backgroundColor: colors[theme].BLUE_500,
     },
     outlinedPressedrec: {
         borderColor: colors[theme].BLUE_500,
+        backgroundColor: colors[theme].GRAY_200,
         borderWidth: 1,
     }, 
     filledPressedround: {

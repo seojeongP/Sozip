@@ -1,10 +1,10 @@
-import { Bus } from "@/types";
+import { Others } from "@/types";
 import axiosInstance from "./axios"
 
-const getBuses = async(): Promise<Bus[]> => {
-    const {data} = await axiosInstance.get('/others/bus')
+const getOtheres = async(): Promise<Others[]> => {
+    const {data} = await axiosInstance.get('/others')
 
     return data;
 };
 
-export {getBuses};
+export {getOtheres};

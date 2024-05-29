@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { AnalysisService } from './analysis.service';
 
-@Controller('analysis')
+@Controller()
 export class AnalysisController {
-    constructor(private otherService: AnalysisService) {}
+    constructor(private analysisService: AnalysisService) {}
 
     @Get('/analysis')
     getAllAnalysis() {
-    return this.otherService.getAllAnalysis();
+        return this.analysisService.getAllAnalysis();
     }
 }

@@ -1,4 +1,6 @@
-import { colors, mapNavigations } from '@/constants';
+import { colors, feedNavigations, mapNavigations } from '@/constants';
+import AnalysisScreen from '@/screens/main/feed/AnalysisScreen';
+import FeedDatailScreen from '@/screens/main/feed/FeedDetailScreen';
 import AddPostScreen from '@/screens/main/map/AddPostScreen';
 import MapHomeScreen from '@/screens/main/map/MapHomeScreen';
 import SearchLocationScreen from '@/screens/main/map/SearchLocationScreen';
@@ -13,6 +15,8 @@ export type MapStackParamList = {
     [mapNavigations.MAP_HOME]: undefined;
     [mapNavigations.ADD_POST]: {location: LatLng};
     [mapNavigations.SEARCH_LOCATION]: undefined;
+    [feedNavigations.FEED_DETAIL]: {id: number};
+    [feedNavigations.ANALYSIS]: {id:number};
 };
 
 const Stack = createStackNavigator<MapStackParamList>();
@@ -59,6 +63,21 @@ function MapStackNavigator() {
           presentation: 'modal',
           headerTitle: '장소 검색',
         //   headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name={feedNavigations.FEED_DETAIL} 
+        component={FeedDatailScreen} 
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name={feedNavigations.ANALYSIS}
+        component={AnalysisScreen}
+        options={{
+          headerTitle: ' ',
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

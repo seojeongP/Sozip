@@ -13,14 +13,6 @@ interface CustomMarkerProps extends MapMarkerProps {
     category: string;
 }
 
-const symbolList = {
-    BUS_STOP: symbols.BUS_STOP,
-    METRO: symbols.METRO,
-    CONV_STORE: symbols.CONV_STORE,
-    PHARMACY: symbols.PHARMACY,
-    string: symbols.string
-};
-
 function CustomMarker({coordinate, category='location-pin', ...props}: CustomMarkerProps) {
     const {theme} = useThemeStore();
     const styles = styling(theme);

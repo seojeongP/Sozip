@@ -8,12 +8,17 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { ThemeMode } from '@/types';
 import useThemeStore from '@/store/useThemStore';
 import FeedStackNavigator from '@/navigations/stack/FeedStackNavigator';
+import useGetAnalysis from '@/hooks/queries/useGetAnalysis';
+import useGetOthers from '@/hooks/queries/useGetOthers';
 
 type MainHomeScreenProps = StackScreenProps<MainStackParamList, typeof mainNavigations.MAIN_HOME>;
 
 function MainHomeScreen({navigation}: MainHomeScreenProps) {
   const {theme} = useThemeStore();
   const styles = styling(theme);
+
+  const {data: result = []} = useGetAnalysis();
+  const {data: others = []} = useGetOthers();
 
   return (
     <SafeAreaView style={styles.container}>

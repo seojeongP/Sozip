@@ -47,6 +47,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SozipApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-SozipApp-SozipAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SozipApp-SozipAppTests.release.xcconfig"; path = "Target Support Files/Pods-SozipApp-SozipAppTests/Pods-SozipApp-SozipAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		D620D1822BFCCB7F0001A194 /* SozipApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SozipApp.entitlements; path = SozipApp/SozipApp.entitlements; sourceTree = "<group>"; };
+		D620D1832C076DAA0001A194 /* FontAwesome6_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome6_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome6_Regular.ttf"; sourceTree = "<group>"; };
 		D6458A702BE4182000454298 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		D6458A712BE4182000454298 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		D6458A722BE4182000454298 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 		D62516442BCE1ECD0074C5CB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D620D1832C076DAA0001A194 /* FontAwesome6_Regular.ttf */,
 				D68C454A2BE6189500A5E610 /* Ionicons.ttf */,
 				D68C45482BE6189500A5E610 /* MaterialIcons.ttf */,
 				D68C45492BE6189500A5E610 /* Octicons.ttf */,

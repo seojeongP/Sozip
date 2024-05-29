@@ -19,7 +19,7 @@ interface Marker {
   payment: string;
 }
 
-interface Bus {
+interface Others {
   id: number;
   which: string;
   latitude: number;
@@ -81,4 +81,4 @@ interface Profile {
   loginType: 'email' | 'kakao' | 'apple';
 }
 
-export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile, Bus, Analysis}
+export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile, Others, Analysis}

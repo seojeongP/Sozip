@@ -12,6 +12,7 @@ const common = {
 
     RED_300: '#FFB4B4',
     RED_500: '#FF5F5F',
+    RED_700: '#DA1818',
 
     GREEN_400: '#CCE6BA',
     YELLOW_400: '#FFE594',

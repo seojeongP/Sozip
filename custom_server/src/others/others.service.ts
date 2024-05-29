@@ -10,21 +10,18 @@ export class OthersService {
         private othersRepository: Repository<Others>,
       ) {}
 
-    async getAllBuses() {
+    async getAllOthers() {
         try {
-          const buses = await this.othersRepository
+          const others = await this.othersRepository
             .createQueryBuilder('others')
-            .where('others.which = :bus', { bus: 'bus' })
             .getMany();
     
-          return buses;
+          return others;
         } catch (error) {
           console.log(error);
           throw new InternalServerErrorException(
-            '버스 마커를 가져오는 도중 에러가 발생했습니다.',
+            '주변 시설 마커를 가져오는 도중 에러가 발생했습니다.',
           );
         }
     }
-
-    
 }

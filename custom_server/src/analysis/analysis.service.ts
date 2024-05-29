@@ -13,6 +13,17 @@ export class AnalysisService {constructor(
         try {
           const analysis = await this.analysisRepository
             .createQueryBuilder('analysis')
+            .select([
+              'analysis.id',
+              'analysis.num',
+              'analysis.check',
+              'analysis.option',
+              'analysis.min',
+              'analysis.Q1',
+              'analysis.median',
+              'analysis.Q3',
+              'analysis.max',
+            ])
             .getMany();
     
           return analysis;

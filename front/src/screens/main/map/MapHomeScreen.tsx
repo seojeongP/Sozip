@@ -3,15 +3,14 @@ import {StyleSheet, View, Alert, Pressable, Button, Text, TouchableOpacity, Dime
 import MapView, { Callout, LatLng, LongPressEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { colors } from '@/constants';
 import useUserLocation from '@/hooks/useUserLocation';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CompositeNavigationProp, useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { MainStackParamList } from '@/navigations/stack/MainStackNavigator';
 import CustomButton from '@/components/common/CustomButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome6_Regular from 'react-native-vector-icons/FontAwesome6'
 import CustomMarker from '@/components/common/CustomMarker';
-import { alerts } from '@/constants/messages';
 import useGetMarkers from '@/hooks/queries/useGetMarkers'
 import useModal from '@/hooks/useModal';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
@@ -26,7 +25,9 @@ import { ThemeMode } from '@/types';
 import { mapNavigations, numbers } from '@/constants';
 import getMapStyle from '@/style/mapStyle';
 import MarkerModal from '@/components/map/MarkerModal';
-import useGetBuses from '@/hooks/queries/useGetBuses';
+import useGetOthers from '@/hooks/queries/useGetOthers';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MainStackParamList>,
@@ -72,13 +73,11 @@ function MapHomeScreen() {
     [],
   );
 
-  const inset = useSafeAreaInsets();
-
   const navigation = useNavigation<Navigation>();
   const {userLocation, isUserLocationError} = useUserLocation();
   const {selectLocation, setSelectLocation} = useLocationStore();
   const {data:markers = []} = useGetMarkers();
-  const {data:buses = []} = useGetBuses();
+  const {data:others = []} = useGetOthers();
   const [markerId, setMarkerId] = useState<number|null>(null);
   const {mapRef, moveMapView, hadleChangeDelta} = useMoveMapView();
 
@@ -105,13 +104,12 @@ function MapHomeScreen() {
   const [police, setPolice] = useState<Boolean>(false);
   const [fire, setFire] = useState<Boolean>(false);
 
-
   const markerModal = useModal();
   // usePermission();
 
   // console.log("왜 못 받아와");
   // console.log("markers", markers);
-  // console.log('buses[3].latitude' , buses[3].latitude);
+  // console.log('buses', buses);
 
   //매물 마커 필터링
   const filterMarkers = (markers: any[], apart: Boolean, villa: Boolean, mm: Boolean, month: Boolean, deposit: Boolean) => {
@@ -139,18 +137,6 @@ function MapHomeScreen() {
     setSelectLocation(nativeEvent.coordinate)
   }
 
-  const handlePressAddPost = () => {
-    //longPress를 안 했는데 add가 눌리면 alert
-    if(!selectLocation){
-      return Alert.alert(alerts.NOT_SELECTED_LOCATION.TITLE, alerts.NOT_SELECTED_LOCATION.DESCRIPTION);
-    }
-    navigation.navigate(mapNavigations.ADD_POST, {location: selectLocation});
-    setSelectLocation({
-      latitude: 0.0922,
-      longitude: 0.0421,
-  },) //다시 맵홈으로 돌아왔을 때 선택 위치를 없애줌
-  }
-
   const handlePressSearch = () => {
     navigation.navigate(mapNavigations.SEARCH_LOCATION);
   }
@@ -172,28 +158,35 @@ function MapHomeScreen() {
     markerModal.show();
   }
 
+  useEffect(()=>{
+    setIsFilter(apart||villa||deposit||month||mm);
+  }, [apart, villa, deposit, month, mm])
+
+  useEffect(()=>{
+    setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire);
+  }, [elementary, middle, high, metro, bus, phar,convi,hospi,mart,lib,police,fire])
+
   const handlePressWhat = (what: string) => {
     switch (what){
-      case "apart": setApart(!apart); console.log('apart', apart);setIsFilter(apart||villa||deposit||month||mm);break;
-      case "villa": setVilla(!villa);setIsFilter(apart||villa||deposit||month||mm); break;
-      case "deposit": setDeposit(!deposit);setIsFilter(apart||villa||deposit||month||mm); break;
-      case "month": setMonth(!month);setIsFilter(apart||villa||deposit||month||mm); break;
-      case "mm": setMm(!mm);setIsFilter(apart||villa||deposit||month||mm); break;
-      case "elementary": setElementary(!elementary);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "middle": setMiddle(!middle);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "high": setHigh(!high);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "bus": setBus(!bus); console.log('bus', bus);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "metro": setMetro(!metro);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "phar": setPhar(!phar);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "convi": setConvi(!convi);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "hospi": setHospi(!hospi);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "mart": setMart(!mart);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "lib": setLib(!lib);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "police": setPolice(!police);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
-      case "fire": setFire(!fire);setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire); break;
+      case "apart": setApart(!apart); console.log('apart', apart);break;
+      case "villa": setVilla(!villa); break;
+      case "deposit": setDeposit(!deposit); break;
+      case "month": setMonth(!month); break;
+      case "mm": setMm(!mm); break;
+      case "elementary": setElementary(!elementary); break;
+      case "middle": setMiddle(!middle); break;
+      case "high": setHigh(!high); break;
+      case "bus": setBus(!bus); break;
+      case "metro": setMetro(!metro); break;
+      case "phar": setPhar(!phar); break;
+      case "convi": setConvi(!convi); break;
+      case "hospi": setHospi(!hospi); break;
+      case "mart": setMart(!mart); break;
+      case "lib": setLib(!lib); break;
+      case "police": setPolice(!police); break;
+      case "fire": setFire(!fire); break;
     }
   }
-
 
   const hadleReset = () => {
     setElementary(false);
@@ -208,7 +201,7 @@ function MapHomeScreen() {
     setLib(false);
     setFire(false);
     setPolice(false);
-    setIsOption(elementary||middle||high||bus||metro||phar||convi||hospi||mart||lib||police||fire);
+    
   }
 
   const hadleReset_2 = () => {
@@ -219,7 +212,7 @@ function MapHomeScreen() {
     setDeposit(false);
     setIsFilter(apart||villa||deposit||mm||month);
   }
-
+  // console.log(others.filter(({ which }) => which === 'bus'))
   const filteredMarkers = filterMarkers(markers, apart, villa, mm, month, deposit);
 
   return (
@@ -243,19 +236,59 @@ function MapHomeScreen() {
           ...numbers.INITIAL_DELTA
         }}
       >
-      
-        {/* <CustomMarker key={buses[3].id} coordinate={{latitude: buses[3].latitude, longitude: buses[3].longitude}} category='location-pin'/> */}
-        {/* <CustomMarker key={markers[3].id} 
-        coordinate={{latitude: markers[3].latitude, longitude: markers[3].longitude}}
-        category='location-pin'/>  */}
 
-      {bus && buses.map(({id, which, ...coordinate})=>(
+      {/* <CustomMarker key={5} coordinate={{latitude: 37.56106678, longitude: 126.9755366}} category='directions-bus'/>  */}
+      <CustomMarker key={others[3].id} coordinate={{latitude: others[3].latitude, longitude: others[3].longitude}} category='location-pin'/>
+      {/* <CustomMarker key={4} coordinate={{latitude: bus_lat, longitude: bus_log}} category='location-pin'/>  */}
+
+
+      {/* {others.map(({id, which, ...coordinate})=>(
             <CustomMarker 
               key={id} 
               coordinate={coordinate} 
               category='directions-bus'
             />
-        ))} 
+        ))}  */}
+
+      {bus&&others
+        .filter(({ which }) => which === 'bus')
+        .map(({ id, which, ...coordinate }) => (
+          <CustomMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='directions-bus'
+          />
+      ))}
+
+      {metro&&others
+        .filter(({ which }) => which === 'metro')
+        .map(({ id, which, ...coordinate }) => (
+          <CustomMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='directions-subway'
+          />
+      ))}
+
+      {elementary&&others
+        .filter(({ which }) => which === 'elementary')
+        .map(({ id, which, ...coordinate }) => (
+          <CustomMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='directions-bus'
+          />
+      ))}
+
+      {middle&&others
+        .filter(({ which }) => which === 'middle')
+        .map(({ id, which, ...coordinate }) => (
+          <CustomMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='directions-subway'
+          />
+      ))}
 
       {filteredMarkers.map(({id, category, payment, ...coordinate})  => (
         <CustomMarker
@@ -271,6 +304,7 @@ function MapHomeScreen() {
           <Marker coordinate={selectLocation} />
         </Callout>
       )}
+
       </MapView>
 
       <View>
@@ -283,6 +317,7 @@ function MapHomeScreen() {
 
       <View style={styles.buttonList}>
         <Pressable style={styles.mapButton} onPress={handlePressSearch}>
+          {/* <FontAwesome6 name='user' color={colors[theme].WHITE} size={25}/> */}
           <Ionicons name="search" color={colors[theme].WHITE} size={25}/>
         </Pressable>
         <Pressable style={styles.mapButton} onPress={handlePressUserLocation}>
@@ -329,19 +364,19 @@ function MapHomeScreen() {
             <Text style={styles.optionTitle}>학교</Text>
             <View style={styles.optionList}>
               <TouchableOpacity
-                style={elementary? styles.optionButton:styles.seletedButton}
+                style={elementary? styles.seletedButton: styles.optionButton}
                 onPress={() => handlePressWhat("elementary")}>
-                <Text style={elementary? styles.buttonText:styles.seletedButtonText}>초등학교</Text>
+                <Text style={elementary? styles.seletedButtonText: styles.buttonText}>초등학교</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={middle? styles.optionButton:styles.seletedButton}
+                style={middle? styles.seletedButton: styles.optionButton}
                 onPress={() => handlePressWhat("middle")}>
-                <Text style={middle? styles.buttonText:styles.seletedButtonText}>중학교</Text>
+                <Text style={middle? styles.seletedButtonText:styles.buttonText}>중학교</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={high? styles.optionButton:styles.seletedButton}
+                style={high? styles.seletedButton: styles.optionButton}
                 onPress={() => handlePressWhat("high")}>
-                <Text style={high? styles.buttonText:styles.seletedButtonText}>고등학교</Text>
+                <Text style={high? styles.seletedButtonText:styles.buttonText}>고등학교</Text>
               </TouchableOpacity>
               </View>
               </View>
@@ -350,14 +385,14 @@ function MapHomeScreen() {
               <Text style={styles.optionTitle}>교통</Text>
             <View style={styles.optionList}>
               <TouchableOpacity
-                style={bus? styles.optionButton:styles.seletedButton}
+                style={bus? styles.seletedButton: styles.optionButton}
                 onPress={() => handlePressWhat("bus")}>
-                <Text style={bus? styles.buttonText:styles.seletedButtonText}>정류장</Text>
+                <Text style={bus? styles.seletedButtonText:styles.buttonText}>정류장</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={metro? styles.optionButton:styles.seletedButton}
+                style={metro? styles.seletedButton: styles.optionButton}
                 onPress={() => handlePressWhat("metro")}>
-                <Text style={metro? styles.buttonText:styles.seletedButtonText}>지하철역</Text>
+                <Text style={metro? styles.seletedButtonText:styles.buttonText}>지하철역</Text>
               </TouchableOpacity>
             </View>
             </View>
@@ -367,41 +402,41 @@ function MapHomeScreen() {
               <View>
               <View style={styles.optionList}>
                 <TouchableOpacity
-                  style={convi? styles.optionButton:styles.seletedButton}
+                  style={convi? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("convi")}>
-                  <Text style={convi? styles.buttonText:styles.seletedButtonText}>편의점</Text>
+                  <Text style={convi? styles.seletedButtonText:styles.buttonText}>편의점</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={mart? styles.optionButton:styles.seletedButton}
+                  style={mart? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("mart")}>
-                  <Text style={mart? styles.buttonText:styles.seletedButtonText}>대형마트</Text>
+                  <Text style={mart? styles.seletedButtonText:styles.buttonText}>대형마트</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={hospi? styles.optionButton:styles.seletedButton}
+                  style={hospi? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("hospi")}>
-                  <Text style={hospi? styles.buttonText:styles.seletedButtonText}>병원</Text>
+                  <Text style={hospi? styles.seletedButtonText:styles.buttonText}>병원</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={phar? styles.optionButton:styles.seletedButton}
+                  style={phar? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("phar")}>
-                  <Text style={phar? styles.buttonText:styles.seletedButtonText}>약국</Text>
+                  <Text style={phar? styles.seletedButtonText:styles.buttonText}>약국</Text>
                 </TouchableOpacity>
                 </View>
                 <View style={styles.optionList}>
                 <TouchableOpacity
-                  style={lib? styles.optionButton:styles.seletedButton}
+                  style={lib? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("lib")}>
-                  <Text style={lib? styles.buttonText:styles.seletedButtonText}>도서관</Text>
+                  <Text style={lib? styles.seletedButtonText:styles.buttonText}>도서관</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={police? styles.optionButton:styles.seletedButton}
+                  style={police? styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("police")}>
-                  <Text style={police? styles.buttonText:styles.seletedButtonText}>경찰서</Text>
+                  <Text style={police? styles.seletedButtonText:styles.buttonText}>경찰서</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={fire? styles.optionButton:styles.seletedButton}
+                  style={fire?styles.seletedButton: styles.optionButton}
                   onPress={() => handlePressWhat("fire")}>
-                  <Text style={fire? styles.buttonText:styles.seletedButtonText}>소방서</Text>
+                  <Text style={fire? styles.seletedButtonText:styles.buttonText}>소방서</Text>
                 </TouchableOpacity>
               </View>
               </View>

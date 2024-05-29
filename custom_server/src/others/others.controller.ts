@@ -5,8 +5,8 @@ import { OthersService } from './others.service';
 export class OthersController {
     constructor(private otherService: OthersService) {}
 
-    @Get('/others/bus')
-    getAllBuses() {
-    return this.otherService.getAllBuses();
-  }
+    @Get('/others')
+    getAllOthers() {
+      return this.otherService.getAllOthers();
+    }
 }

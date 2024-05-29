@@ -48,7 +48,7 @@ function AdditionalStackNavigator() {
         component={AdditionalMoreScreen} 
         options={{
           headerTitle: '더 많은 소식',
-        //   headerShown: false,
+          headerShown: false,
         }}
       />
       <Stack.Screen 
@@ -56,7 +56,7 @@ function AdditionalStackNavigator() {
         component={AdditionalMoreDescScreen} 
         options={{
           headerTitle: '이사는 너무 어려워',
-        //   headerShown: false, 
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

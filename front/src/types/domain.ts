@@ -26,6 +26,18 @@ interface Bus {
   longitude: number;
 }
 
+interface Analysis {
+  id: number;
+  num: number;
+  check: string;
+  option: string;
+  min: number;
+  Q1: number;
+  median: number;
+  Q3: number;
+  max: number;
+}
+
 interface Post extends Marker {
   title: string;
   address: string;
@@ -69,4 +81,4 @@ interface Profile {
   loginType: 'email' | 'kakao' | 'apple';
 }
 
-export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile, Bus}
+export type {MarkerColor, MarkerSymbol, Category, ImageUri, Marker, Post, Profile, Bus, Analysis}

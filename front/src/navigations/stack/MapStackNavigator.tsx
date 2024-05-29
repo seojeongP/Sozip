@@ -2,6 +2,7 @@ import { colors, mapNavigations } from '@/constants';
 import AddPostScreen from '@/screens/main/map/AddPostScreen';
 import MapHomeScreen from '@/screens/main/map/MapHomeScreen';
 import SearchLocationScreen from '@/screens/main/map/SearchLocationScreen';
+import SelectRegionScreen from '@/screens/main/map/SelectRegionScreen';
 import useThemeStore from '@/store/useThemStore';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';

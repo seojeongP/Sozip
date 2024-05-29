@@ -5,7 +5,8 @@ import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import {Image, Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type BankSelectionScreenProps = StackScreenProps<LoanStackParamList>;
 
@@ -19,7 +20,10 @@ function BankSelectionScreen({navigation}: BankSelectionScreenProps) {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.titleText}>거래 은행</Text>
+        <SafeAreaView style={styles.headerContainer}>
+          <MaterialIcons name='keyboard-arrow-left' size={40} color={colors[theme].GRAY_400} onPress={() => navigation.goBack()}/>
+        </SafeAreaView>
+        <Text style={styles.titleText}>거래 은행 선택 </Text>
         <View style={styles.logosContainer}>
             <View style={styles.rowLogoContainer}>
                 <Pressable style={styles.logoContainer} onPress={()=>navigation.navigate(loanNavigations.BANK_ITEM_LIST, {bank:'ur',})}>
@@ -46,9 +50,6 @@ function BankSelectionScreen({navigation}: BankSelectionScreenProps) {
                 </Pressable>
             </View>
         </View>
-        <View style={styles.button}>
-            <CustomButton label='다음' size='large'/>
-        </View>
     </View>
   )
 }
@@ -59,7 +60,15 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         padding: 20,
         gap: 30,
     },
+    headerContainer: {
+        position: 'absolute',
+        // padding: 20,
+        top: 12,
+        zIndex: 1,
+        width: '100%',
+    },
     titleText: {
+        marginLeft: 30,
         fontSize: 23,
         fontWeight: '700',
     },

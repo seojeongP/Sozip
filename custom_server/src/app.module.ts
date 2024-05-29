@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { FavoriteModule } from './favorite/favorite.module';
 import { OthersModule } from './others/others.module';
+import { AnalysisModule } from './analysis/analysis.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { OthersModule } from './others/others.module';
     ImageModule,
     FavoriteModule,
     OthersModule,
+    AnalysisModule,
   ],
   providers: [ConfigService],
 })

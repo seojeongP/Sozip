@@ -1,4 +1,6 @@
+import CustomButton from '@/components/common/CustomButton';
 import InputField from '@/components/common/InputField';
+import DatePickerOption from '@/components/setting/DatePickerOption';
 import EditProfileHeaderRight from '@/components/setting/EditProfileHeaderRight';
 import EditProfileImageOption from '@/components/setting/EditProfileImageOption';
 import {colors, settingNavigations} from '@/constants';
@@ -12,7 +14,7 @@ import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
 import {validateEditProfile} from '@/utils';
 import {StackScreenProps} from '@react-navigation/stack';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -66,7 +68,7 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
         onError: error =>
           Toast.show({
             type: 'error',
-            text1: error.response?.data.message || errorMessages.UNEXPECT_ERROR,
+            text1: errorMessages.UNEXPECT_ERROR,
             position: 'bottom',
           }),
       },
@@ -120,14 +122,24 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
           )}
         </Pressable>
       </View>
-
-      <InputField
-        {...editProfile.getTextInputProps('nickname')}
-        error={editProfile.errors.nickname}
-        touched={editProfile.touched.nickname}
-        placeholder="닉네임을 입력해주세요."
-      />
-
+      <View style={styles.information}>
+          <InputField
+            {...editProfile.getTextInputProps('nickname')}
+            error={editProfile.errors.nickname}
+            touched={editProfile.touched.nickname}
+            placeholder="닉네임을 입력해주세요."
+          />
+          <View style={styles.input}>
+            <Text style={styles.subtitle}>생년월일</Text>
+            <InputField
+              {...editProfile.getTextInputProps('nickname')}
+              error={editProfile.errors.nickname}
+              touched={editProfile.touched.nickname}
+              placeholder="생년월일을 입력해주세요."
+              // style={styles.inputbox}
+            />
+          </View>
+      </View>
       <Pressable 
         style={styles.deleteAccountContainer}
         onPress={()=>navigation.navigate(settingNavigations.DELETE_ACCOUNT)}
@@ -140,11 +152,11 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
         hideOption={imageOption.hide}
         onChangeImage={imagePicker.handleChange}
       />
-    </View>
+      </View>
   );
 }
 
-const styling = (theme:ThemeMode)=>StyleSheet.create({
+const styling = (theme:ThemeMode) => StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
@@ -186,6 +198,25 @@ const styling = (theme:ThemeMode)=>StyleSheet.create({
   deleteAccountText: {
     color: colors[theme].RED_500,
     fontSize: 15,
+  },
+  information: {
+    gap: 20,
+  },
+  input: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingLeft: 10,
+  },
+  subtitle: {
+    // flex: 1,
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  inputbox: {
+    // flex: 1,
+    height: 30,
+    width: '100%',
   },
 });
 

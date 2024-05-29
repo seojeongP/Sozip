@@ -58,10 +58,27 @@ function MarkerModal({markerId, isVisible, hide}: MarkerModalProps) {
         <Pressable style={styles.cardContainer} onPress={handlePressModal}>
           <View style={styles.cardInner}>
             <View style={styles.cardAlign}>
+            {post.images.length > 0 && (
+                <View style={styles.imageContainer}>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: `${
+                        Platform.OS === 'ios'
+                          ? 'http://localhost:3030/'
+                          : 'http://10.0.2.2:3030/'
+                      }${post.images[0]?.uri}`,
+                    }}
+                    resizeMode="cover"
+                  />
+                </View>
+              )}
+              {post.images.length === 0 && (
                 <View
                   style={[styles.imageContainer, styles.emptyImageContainer]}>
-                  {/* <CustomMarker color={post.color} score={post.score} /> */}
+                  <MaterialIcons name='location-pin' />
                 </View>
+              )}
               <View style={styles.infoContainer}>
                 <View style={styles.addressContainer}>
                   <Octicons name="location" size={10} color={colors[theme].GRAY_500} />

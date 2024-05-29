@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import {Button, SafeAreaView, StyleSheet, View, Image, Dimensions, TouchableOpacity, Text, Pressable} from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { colors, mainNavigations } from '@/constants';
+import { colors, feedNavigations, mainNavigations } from '@/constants';
 import { MainStackParamList } from '@/navigations/stack/MainStackNavigator';
 import useAuth from '@/hooks/queries/useAuth';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { ThemeMode } from '@/types';
 import useThemeStore from '@/store/useThemStore';
+import FeedStackNavigator from '@/navigations/stack/FeedStackNavigator';
 
 type MainHomeScreenProps = StackScreenProps<MainStackParamList, typeof mainNavigations.MAIN_HOME>;
 

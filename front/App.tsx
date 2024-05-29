@@ -12,7 +12,6 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStackNavigator from './src/navigations/stack/AuthStackNavigator';
 import { QueryClientProvider } from '@tanstack/react-query';
-import type {PropsWithChildren} from 'react';
 import RootNavigator from './src/navigations/root/RootNavigator';
 import queryClient from './src/api/queryClient';
 import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';

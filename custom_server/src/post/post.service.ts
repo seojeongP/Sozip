@@ -56,7 +56,7 @@ export class PostService {
     return this.postRepository
       .createQueryBuilder('post')
       .leftJoinAndSelect('post.images', 'image')
-      .where('post.userId = :userId', { userId })
+      // .where('post.userId = :userId', { userId })
   }
 
   async getMyPosts(page: number, user: User) {
@@ -79,7 +79,7 @@ export class PostService {
           'favorite.userId = :userId',
           { userId: user.id },
         )
-        .where('post.userId = :userId', { userId: user.id })
+        // .where('post.userId = :userId', { userId: user.id })
         .andWhere('post.id = :id', { id })
         .getOne();
 

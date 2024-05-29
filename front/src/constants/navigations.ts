@@ -23,6 +23,7 @@ const mainNavigations = {
 } as const;
 
 const mapNavigations = {
+    SELET_REGION : 'SelectRegion',
     MAP_HOME: 'MapHome',
     ADD_POST: 'AddPost',
     SEARCH_LOCATION: 'SearchLocation'

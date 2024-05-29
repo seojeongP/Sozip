@@ -6,6 +6,8 @@ const queryKeys = {
     GET_MARKERS: 'getMarkers',
     BUS: 'bus',
     GET_BUSES: 'getBuses',
+    ANALYSIS: 'analysis',
+    GET_ANALYSIS: 'getAnalysis',
     POST: 'post',
     GET_POST: 'getPost',
     GET_POSTS: 'getPosts',

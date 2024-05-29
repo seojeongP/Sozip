@@ -21,7 +21,7 @@ export type LoanStackParamList = {
     [loanNavigations.LTV_MORE]: undefined;
     [loanNavigations.BANK_SELECTION]: undefined;
     [loanNavigations.BANK_ITEM_LIST]: {bank: string};
-    [loanNavigations.BANK_ITEM_DETAIL]: {bank: string};
+    [loanNavigations.BANK_ITEM_DETAIL]: {bank: string, title: string};
 };
 
 const Stack = createStackNavigator<LoanStackParamList>();
@@ -66,7 +66,7 @@ function LoanStackNavigator() {
         component={VerifyHomeScreen} 
         options={{
           headerTitle: '대출신청 자격 확인',
-        //   headerShown: false, 
+          headerShown: false, 
         }}
       />
       <Stack.Screen 
@@ -74,7 +74,7 @@ function LoanStackNavigator() {
         component={BankSelectionScreen} 
         options={{
           headerTitle: '거래 은행 선택',
-        //   headerShown: false, 
+          headerShown: false, 
         }}
       />
       <Stack.Screen 
@@ -82,7 +82,7 @@ function LoanStackNavigator() {
         component={BankItemListScreen} 
         options={{
           headerTitle: '은행 별 대출 상품',
-        //   headerShown: false, 
+          headerShown: false, 
         }}
         initialParams={{
           bank: 'logo',
@@ -93,7 +93,7 @@ function LoanStackNavigator() {
         component={BankItemDetailScreen} 
         options={{
           headerTitle: '대출 상품 정보',
-        //   headerShown: false, 
+          headerShown: false, 
         }}
       />
       <Stack.Screen 

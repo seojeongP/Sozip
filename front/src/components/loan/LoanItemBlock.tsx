@@ -7,43 +7,50 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 interface LoanItemBlockProps extends PressableProps{
     name: string;
+    title: string;
+    desc: string;
 }
 
-function LoanItemBlock({name, ...props}: LoanItemBlockProps) {
+function LoanItemBlock({name, title, desc, ...props}: LoanItemBlockProps) {
     const {theme} = useThemeStore();
     const styles = styling(theme);
+    // console.log('name',name);
   return (
     <View style={[styles.optionBackground]}>
-                <Pressable style={styles.cardContainer} >
-                <View style={styles.cardInner}>
-                    
-                    <View style={styles.imageContainer}>
-                        <Image style={styles.image} source={require(`../../assets/bank/ur.png`)} />
-                    </View>
-                    <View style={styles.titleGap}>
-                        <Text style={styles.titleText}>우리 청년 맞춤 월세대출</Text>
-                        <View style={styles.cardAlign}>
-                            <View style={styles.infoContainer}>
-                                <Text
-                                    style={styles.addressText}
-                                    ellipsizeMode="tail"
-                                    numberOfLines={2}>
-                                    대출기간 13년 내에서 최대 12백만원까지 지원
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={styles.nextButton}>
-                        <MaterialIcons
-                            name="arrow-forward-ios"
-                            size={20}
-                            color={colors[theme].BLACK}
-                        />
+        <View style={styles.cardContainer} >
+        <View style={styles.cardInner}>
+            
+            <View style={styles.imageContainer}>
+                {name=='ur'&&<Image style={styles.image} source={require(`../../assets/bank/ur.png`)} />}
+                {name=='kb'&&<Image style={styles.image} source={require(`../../assets/bank/kb.png`)} />}
+                {name=='hn'&&<Image style={styles.image} source={require(`../../assets/bank/hn.png`)} />}
+                {name=='kakao'&&<Image style={styles.image} source={require(`../../assets/bank/kakao.png`)} />}
+                {name=='toss'&&<Image style={styles.image} source={require(`../../assets/bank/toss.png`)} />}
+            </View>
+            <View style={styles.titleGap}>
+                <Text style={styles.titleText} ellipsizeMode="tail" numberOfLines={1}>{title}</Text>
+                <View style={styles.cardAlign}>
+                    <View style={styles.infoContainer}>
+                        <Text
+                            style={styles.addressText}
+                            ellipsizeMode="tail"
+                            numberOfLines={2}>
+                            {desc}
+                        </Text>
                     </View>
                 </View>
-                </Pressable>
             </View>
+
+            <View style={styles.nextButton}>
+                <MaterialIcons
+                    name="arrow-forward-ios"
+                    size={20}
+                    color={colors[theme].BLACK}
+                />
+            </View>
+        </View>
+        </View>
+    </View>
   )
 }
 
@@ -91,8 +98,10 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     },
     image: {
         resizeMode: 'cover',
-        width: '100%',
-        height: '100%',
+        width: '80%',
+        height: '80%',
+        left: 5,
+        top: 10,
         borderRadius: 35,
     },
     cardAlign: {

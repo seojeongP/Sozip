@@ -11,7 +11,7 @@ import { ThemeMode } from '@/types';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import {Dimensions, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, Platform, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -73,10 +73,23 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
         </SafeAreaView>
 
         <View style={styles.imageContainer}>
+          {post.images.length > 0 && (
+            <Image
+              style={styles.image}
+              source={{
+                uri: `${
+                  Platform.OS === 'ios'
+                    ? 'http://localhost:3030/'
+                    : 'http://10.0.2.2:3030/'
+                }${post.images[0].uri}`,
+              }}
+              resizeMode="cover"
+            />
+          )}
           {post.images.length === 0 && (
-              <View style={styles.emptyImageContainer}>
-                <Text>No Image</Text>
-              </View>
+            <View style={styles.emptyImageContainer}>
+              <Text>No Image</Text>
+            </View>
           )}
         </View>
 
@@ -214,14 +227,6 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
           </View>
       </View>
 
-
-
-      {post.images.length > 0 && (
-        <View style={styles.imageContentsContainer}>
-          <PreviewImageList imageUris={post.images} zoomEnable />
-        </View>
-      )}
-
     </ScrollView>
 
     <View style={[styles.bottomContainer, {paddingBottom: insets.bottom}]}>
@@ -267,6 +272,10 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   scrollNoInsets: {
     marginBottom: 65,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   imageContainer: {
       width: Dimensions.get('screen').width,

@@ -1,5 +1,6 @@
 import { ResponsePost, ResponseSinglePost } from '@/api';
 import { colors, feedNavigations } from '@/constants';
+import useGetPost from '@/hooks/queries/useGetPost';
 import useMutateFavoritePost from '@/hooks/queries/useMutateFavoritePost';
 import { FeedStackParamList } from '@/navigations/stack/FeedStackNavigator';
 import useThemeStore from '@/store/useThemStore';
@@ -8,8 +9,7 @@ import { getDateWithSeparator } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import {Dimensions, Pressable, StyleSheet, Text, View} from 'react-native';
-import { Image } from 'react-native-reanimated/lib/typescript/Animated';
+import {Dimensions, Image, Platform, Pressable, StyleSheet, Text, View} from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
 
 interface FeedItemProps {
@@ -24,25 +24,41 @@ function FeedItem({post}: FeedItemProps) {
 
     const favoriteMutation = useMutateFavoritePost();
     const navigation = useNavigation<Navigation>();
+    const {data: item, isPending, isError} = useGetPost(post.id);
 
     const handlePressFeed = () => {
         navigation.navigate(feedNavigations.FEED_DETAIL, {id: post.id})
     };
 
-    console.log('post.isFavorite', post.isFavorite);
 
     const handlePressFavorite = () => {
       favoriteMutation.mutate(post.id);
-      
     }
 
   return (
     <View style={styles.shadow} >
     <Pressable style={styles.container} onPress={handlePressFeed}>
         <View>
-            <View style={[styles.imageContainer, styles.emptyImageContainer]}>
-                    <Text style={styles.descriptionText}>No Image</Text>
-            </View>
+            {post.images.length > 0 && (
+              <View key={post.id} style={styles.imageContainer}>
+                <Image
+                  style={styles.image}
+                  source={{
+                    uri: `${
+                      Platform.OS === 'ios'
+                        ? 'http://localhost:3030/'
+                        : 'http://10.0.2.2:3030/'
+                    }${post.images[0]?.uri}`,
+                  }}
+                  resizeMode="cover"
+                />
+              </View>
+            )}
+            {post.images.length === 0 && (
+              <View style={[styles.imageContainer, styles.emptyImageContainer]}>
+                <Text style={styles.descriptionText}>No Image</Text>
+              </View>
+            )}
         </View>
         <View style={styles.textContainer}>
             {/* <Text style={styles.dateText}>{getDateWithSeparator(post.date, '/')}</Text> */}
@@ -62,7 +78,7 @@ function FeedItem({post}: FeedItemProps) {
           <Octicons 
             name='heart-fill' 
             size={30} 
-            color={post.isFavorite ? colors[theme].PINK_700 : colors[theme].GRAY_400}/>
+            color={item?.isFavorite ? colors[theme].PINK_700 : colors[theme].GRAY_400}/>
             {/* color={colors[theme].GRAY_400}/> */}
         </Pressable>
         </View>

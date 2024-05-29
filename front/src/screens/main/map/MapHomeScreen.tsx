@@ -1,4 +1,3 @@
-import useAuth from '@/hooks/queries/useAuth';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {StyleSheet, View, Alert, Pressable, Button, Text, TouchableOpacity, Dimensions, SafeAreaView} from 'react-native';
 import MapView, { Callout, LatLng, LongPressEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -26,9 +25,6 @@ import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
 import { mapNavigations, numbers } from '@/constants';
 import getMapStyle from '@/style/mapStyle';
-import useLegendStorage from '@/hooks/useLegendStorage';
-import AddPostHeaderRight from '@/components/post/AddPostHeaderRight';
-import MapLegend from '@/components/map/MapLegend';
 import MarkerModal from '@/components/map/MarkerModal';
 import useGetBuses from '@/hooks/queries/useGetBuses';
 

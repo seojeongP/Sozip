@@ -6,10 +6,10 @@ import { ThemeMode } from '@/types';
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Octicons from 'react-native-vector-icons/Octicons';
 import {RadarChart} from '@salmonco/react-native-radar-chart';
-// import {  PieChart } from "react-native-chart-kit";
-import { BarChart, PieChart, PieChartPro} from "react-native-gifted-charts";
+import { BarChart, PieChartPro} from "react-native-gifted-charts";
+import BoxPlot from '@/components/feed/BoxPlot';
+import useGetAnalysis from '@/hooks/queries/useGetAnalysis';
 
 
 type AnalysisScreenProps = StackScreenProps<FeedStackParamList,typeof feedNavigations.ANALYSIS>;
@@ -20,14 +20,34 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
   const styles = styling(theme);
 
   const {id} = route.params;
-  const {data: post, isPending, isError} = useGetPost(id);
+  const {data: post} = useGetPost(id);
+  const {data: result = []} = useGetAnalysis();
 
-  const pieData = [{value: 525, label: '소형', color: '#B4E0FF', text: '소형(525)'},
-                    {value: 1277, label: '중소형', color: '#CCE6BA', text: '중소형(1277)'},
-                    {value: 2308, label: '중형', color: '#FFE594', text: '중형(2308)'},
-                    {value: 684, label: '중대형', color: '#C4C4E7', text: '중대형(684)'},
-                    {value: 260, label: '대형', color: '#EC87A5', text: '대형(260)'},
-  ];
+  console.log("post?.gu", post?.gu)
+
+  // const test = result.filter(item => item.num === 1 && item.check === post?.gu);
+  // console.log("test",test);
+  // const first = result.filter(item => item.num === 1 && item.check === post?.gu)[0];
+  // if(!first) console.log("first 안 들어옴");
+  // const first_total = first.min+first.Q1+first.median+first.Q3+first.max;
+
+  // const pieData = [{value: first.min, color: '#B4E0FF', text: `소형(${Math.floor(100*first.min/first_total)}%)`},
+  //                   {value: first.Q1, color: '#CCE6BA', text: `중소형(${Math.floor(100*first.Q1/first_total)}%)`},
+  //                   {value: first.median, color: '#FFE594', text: `중형(${Math.floor(100*first.median/first_total)}%)`},
+  //                   {value: first.Q3, color: '#C4C4E7', text: `중대형(${Math.floor(100*first.Q3/first_total)}%)`},
+  //                   {value: first.max, color: '#EC87A5', text: `대형(${Math.floor(100*first.max/first_total)}%)`},
+  // ];
+
+  // const second = result.filter(item => item.num === 2 && item.check === post?.dong)[0];
+  // const second_total = second.min+second.Q1+second.median+second.Q3+second.max;
+  // // console.log(first);
+
+  // const pieData_2 = [{value: second.min, color: '#B4E0FF', text: `소형(${Math.floor(100*second.min/second_total)}%)`},
+  //                   {value: second.Q1, color: '#CCE6BA', text: `중소형(${Math.floor(100*second.Q1/second_total)}%)`},
+  //                   {value: second.median, color: '#FFE594', text: `중형(${Math.floor(100*second.median/second_total)}%)`},
+  //                   {value: second.Q3, color: '#C4C4E7', text: `중대형(${Math.floor(100*second.Q3/second_total)}%)`},
+  //                   {value: second.max, color: '#EC87A5', text: `대형(${Math.floor(100*second.max/second_total)}%)`},
+  // ];
 
   const customRadarData = [
     {label: '공공도서관(개)', value:Number(Number(post?.lib) / 0.639414)*40},
@@ -39,7 +59,20 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
     {label: '경찰서(개)', value:Number(Number(post?.police) / 5.354590)*40},
   ];
 
-  const boxPlotData = { min: 10, Q1: 25, median: 50, Q3: 75, max: 90 };
+  const house_scale = Number(post?.area) < 40 ? '소형'
+                    : Number(post?.area) < 62.8 ? '중소형'
+                    : Number(post?.area) < 95.86 ? '중형'
+                    : Number(post?.area) < 135 ? '중대형'
+                    : '대형';
+  // const fourth = result.filter(item => item.num === 4 && item.check === post?.payment && item.option === house_scale)[0];
+  // console.log('fourth', fourth);
+  // const fourth_min = ((fourth.min - fourth.min) / (fourth.max - fourth.min)) * (300 - 0) + 0;
+  // const fourth_Q1 = ((fourth.Q1 - fourth.min) / (fourth.max - fourth.min)) * (300 - 0) + 0;
+  // const fourth_median = ((fourth.median - fourth.min) / (fourth.max - fourth.min)) * (300 - 0) + 0;
+  // const fourth_Q3 = ((fourth.Q3 - fourth.min) / (fourth.max - fourth.min)) * (300 - 0) + 0;
+  // const fourth_max = ((fourth.max - fourth.min) / (fourth.max - fourth.min)) * (300 - 0) + 0;
+  // const boxPlotData = { min: fourth_min, Q1: fourth_Q1, median: fourth_median, Q3: fourth_Q3, max: fourth_max };
+  
   const bar_data = [{value: 2052.13738334, label: '강남구', frontColor:'#EA96A3'},
                     {value: 985.41546748, label: '강동구', frontColor:'#E8968C'},
                     {value: 675.5636289, label: '강북구', frontColor:'#E2925A'},
@@ -72,7 +105,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
       <View>
           <Text style={styles.title}>분석 결과</Text>
         
-        <View style={styles.chartContainer}>
+        {/* {post?.category=='apart'&&<View style={styles.chartContainer}>
           <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>구별 아파트 규모 분포 비교</Text>
             <Text style={{fontSize:13}}>{post?.title}이(가) 위치한 {post?.gu}의 아파트 규모의 분포를 비교합니다.</Text>
@@ -84,17 +117,33 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             showText
             textColor={colors[theme].GRAY_700}
             innerRadius={40}
-            // showTextBackground
-            // textBackgroundColor={colors[theme].GRAY_200}
             textSize={12}
-            // textBackgroundRadius={22}
             labelsPosition='mid'
             data={pieData}
           />
           </View>
-        </View>
+        </View>}
 
-        <View style={styles.list}>
+        {post?.category=='apart'&&<View style={styles.chartContainer}>
+          <View style={{alignItems: 'center'}}>
+          <Text style={styles.subtitle}>동별 아파트 규모 분포 비교</Text>
+            <Text style={{fontSize:13}}>{post?.title}이(가) 위치한 {post?.dong}의 아파트 규모의 분포를 비교합니다.</Text>
+          </View>
+          
+          <View style={styles.pieChart}>
+          <PieChartPro
+            donut
+            showText
+            textColor={colors[theme].GRAY_700}
+            innerRadius={40}
+            textSize={12}
+            labelsPosition='mid'
+            data={pieData_2}
+          />
+          </View>
+        </View>}
+
+        {post?.category=='apart'&&<View style={styles.list}>
           <View style={{gap: 10, }}>
             <Text style={styles.subtitle}>규모 구분 기준</Text>
             <Text>소형  : 40㎡미만 </Text>
@@ -103,18 +152,30 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             <Text>중대형 : 95.86㎡≤ ≤135㎡</Text>
             <Text>대형  : 135㎡이상</Text>
           </View>
-        </View>
+        </View>} */}
 
-        <View style={styles.chartContainer}>
-          
-          
+      <View style={styles.chartContainer}>
+        <View style={{alignItems: 'center'}}>
+          <Text style={styles.subtitle}>구별 평균 평당가격 비교</Text>
+          <Text>서울특별시 25개의 구의 평균 평당가격을 비교합니다. (만원)</Text>
+        </View>
+          <BarChart
+            data={bar_data}
+            width={screenWidth}
+            height={200}
+            barWidth={20}
+            spacing={18}
+            rotateLabel
+          />
+        </View>
+      </View>
+
+      <View style={styles.chartContainer}>
+          <View></View>
           <View style={{alignItems: 'center'}}>
             <Text style={styles.subtitle}>각 시설별 분포 비교</Text>
             <Text>{post?.title} 주변 시설의 분포를 확인합니다.</Text>
           </View>
-        
-        {/* <BoxPlot width={300} height={500} data={boxPlotData} /> */}
-
           <RadarChart
             data={customRadarData}
             size={350}
@@ -135,42 +196,14 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           />
       </View>
 
-      <View style={styles.chartContainer}>
-        <View style={{alignItems: 'center'}}>
-          <Text style={styles.subtitle}>구별 평균 평당가격 비교</Text>
-          <Text>서울특별시 25개의 구의 평균 평당가격을 비교합니다. (만원)</Text>
-        </View>
-        
-        {/* <Plotly data={radarData} layout={radarLayout} /> */}
-        {/* <BoxPlot width={300} height={500} data={boxPlotData} /> */}
-          <BarChart
-            data={bar_data}
-            width={screenWidth}
-            height={200}
-            barWidth={20}
-            spacing={18}
-            rotateLabel
-            // showLine
-            // lineData={bar_data}
-          />
-        </View>
-      </View>
 
-      <View style={styles.chartContainer}>
-        <Text style={styles.subtitle}>구별 평균 평당가격 비교</Text>
-        
-        {/* <Plotly data={radarData} layout={radarLayout} /> */}
-        {/* <BoxPlot width={300} height={500} data={boxPlotData} /> */}
-
-          {/* <BarChart
-            data={bar_data}
-            width={screenWidth}
-            height={220}
-            barWidth={20}
-            spacing={20}
-            rotateLabel
-          /> */}
+      {/* {post?.category=='apart'&&<View style={[styles.chartContainer, {marginVertical:20,}]}>
+        <Text style={styles.subtitle}>동일 규모내의 가격 비교</Text>
+        <View style={styles.boxsPlotContainer}>
+          <BoxPlot width={300} height={300} data={boxPlotData} />
         </View>
+
+        </View>} */}
     </ScrollView>
 
   )
@@ -212,6 +245,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30, 
+    paddingTop: 20,
     gap: 30,
   },
   pieChart: {
@@ -221,6 +255,11 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   barChart: {
     // flex: 1,
+  },
+  boxsPlotContainer: {
+    borderWidth: 1,
+    borderColor: colors[theme].GRAY_400,
+    
   },
 });
 

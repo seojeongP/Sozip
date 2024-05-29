@@ -22,14 +22,78 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
           <MaterialIcons name='keyboard-arrow-left' size={40} color={colors[theme].GRAY_400} onPress={() => navigation.goBack()}/>
       </SafeAreaView>
       <ScrollView>
-        <View style={{marginTop: 20, gap:10}}>
+        <View style={{marginTop: 20, gap:20}}>
             <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC)}>
-            <Image resizeMode="contain"
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
                 source={require('../../assets/news_1.png')} />
             </TouchableOpacity>
             <TouchableOpacity>
-            <Image resizeMode="contain"
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
                 source={require('../../assets/news_2.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_4.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC2)}>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_3.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_5.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10, 
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_6.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10, left: 10,
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_7.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image resizeMode="contain" 
+                  style={{borderRadius: 10, 
+                          shadowColor: colors[theme].GRAY_500,
+                          shadowOffset: { width: 2, height: 2 },
+                          shadowOpacity: 0.9,
+                          shadowRadius: 5,}}
+                source={require('../../assets/news_8.png')} />
             </TouchableOpacity>
         </View>
       </ScrollView>

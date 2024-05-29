@@ -33,21 +33,25 @@ function MainHomeScreen({navigation}: MainHomeScreenProps) {
         <View style={styles.twocategories}>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={()=>navigation.navigate(mainNavigations.MAP)}>
-              <Image resizeMode="contain" source={require('../../assets/my_home.png')} />
+              {theme=='light' && <Image resizeMode="contain" source={require('../../assets/my_home.png')} />}
+              {theme=='dark' && <Image resizeMode="contain" source={require('../../assets/my_home_dark.png')} />}
             </TouchableOpacity>
           </View>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={()=>navigation.navigate(mainNavigations.FEED)}>
-              <Image resizeMode="contain" source={require('../../assets/zzim.png')} />
+              {theme=='light' && <Image resizeMode="contain" source={require('../../assets/zzim.png')} />}
+              {theme=='dark' && <Image resizeMode="contain" source={require('../../assets/zzip_dark.png')} />}
             </TouchableOpacity>
           </View>
         </View>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={()=>navigation.navigate(mainNavigations.LOAN)}>
-              <Image resizeMode="contain" source={require('../../assets/loan.png')} />
+              {theme=='light' && <Image resizeMode="contain" source={require('../../assets/loan.png')} />}
+              {theme=='dark' && <Image resizeMode="contain" source={require('../../assets/loan_dark.png')} />}
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate(mainNavigations.ADDI)}>
-              <Image resizeMode="contain" source={require('../../assets/learn.png')} />
+              {theme=='light' && <Image resizeMode="contain" source={require('../../assets/learn.png')} />}
+              {theme=='dark' && <Image resizeMode="contain" source={require('../../assets/learn_dark.png')} />}
             </TouchableOpacity>
           </View>
     </SafeAreaView>

@@ -129,8 +129,8 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
 
           <View style={styles.descriptionContainer}>
             <View style={{flexDirection: 'row', gap: 20,}}>
-              <Ionicons name="wallet" size={25} color={colors[theme].UNCHANGE_BLACK} />
-              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600',}}>거래가</Text>
+              <Ionicons name="wallet" size={25} color={colors[theme].BLACK} />
+              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600', color:colors[theme].BLACK}}>거래가</Text>
             </View>
             <View style={styles.descriptionDetailContainer}>
             <Text style={[styles.descriptionText, {fontWeight: '700'}]}>
@@ -147,8 +147,8 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
 
           <View style={styles.descriptionContainer}>
           <View style={{flexDirection: 'row', gap: 20,}}>
-              <Ionicons name="resize" size={25} color={colors[theme].UNCHANGE_BLACK} />
-              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600',}}>전용면적</Text>
+              <Ionicons name="resize" size={25} color={colors[theme].BLACK} />
+              <Text style={{lineHeight: 25,fontSize: 18, fontWeight: '600', color:colors[theme].BLACK}}>전용면적</Text>
             </View>
             <Text style={styles.descriptionText}>
               {post.area} m{'\xB2'} / {dividedArea} 평
@@ -160,69 +160,69 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
       
           <View style={styles.tableContainer}>
             <View style={[styles.oneRow]}>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>주변 시설</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>가장 가까운 시설 정보</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>거리(m)</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>가장 가까운 시설 정보</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>거리(m)</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>버스 정류장</Text></View>
-              <View style={styles.oneBlock}><Text>{post.bus}</Text></View>
-              <View style={styles.oneBlock}><Text>{post.dis_bus}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>버스 정류장</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.bus}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_bus}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>지하철역</Text></View>
-              <View style={styles.oneBlock}><Text>{post.metro}</Text></View>
-              <View style={styles.oneBlock}><Text>{post.dis_metro}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>지하철역</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.metro}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_metro}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>초등학교</Text></View>
-              <View style={styles.oneBlock}><Text>{post.elementary}</Text></View>
-              <View style={styles.oneBlock}><Text>{post.dis_elementary}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>초등학교</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.elementary}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_elementary}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>중학교</Text></View>
-              <View style={styles.oneBlock}><Text>{post.middle}</Text></View>
-              <View style={styles.oneBlock}><Text>{post.dis_middle}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>중학교</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.middle}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_middle}</Text></View>
             </View>
             <View style={[styles.oneRow, {borderBottomEndRadius: 10,borderBottomStartRadius: 10,}]}>
-              <View style={styles.oneBlock}><Text>고등학교</Text></View>
-              <View style={styles.oneBlock}><Text>{post.high}</Text></View>
-              <View style={styles.oneBlock}><Text>{post.dis_high}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>고등학교</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.high}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_high}</Text></View>
             </View>
           </View>
 
           <View style={styles.tableContainer}>
             <View style={[styles.oneRow]}>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>주변 시설 (1.3km)</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700'}}>개수</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설 (1.3km)</Text></View>
+              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>개수</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>편의점 (300m)</Text></View>
-              <View style={styles.oneBlock}><Text>{post.conv}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>편의점 (300m)</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.conv}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>대형마트</Text></View>
-              <View style={styles.oneBlock}><Text>{post.mart}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>대형마트</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.mart}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>약국 (300m)</Text></View>
-              <View style={styles.oneBlock}><Text>{post.pharmacy}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>약국 (300m)</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.pharmacy}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>병원</Text></View>
-              <View style={styles.oneBlock}><Text>{post.hospital}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>병원</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.hospital}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>공공도서관</Text></View>
-              <View style={styles.oneBlock}><Text>{post.lib}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>공공도서관</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.lib}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>경찰서</Text></View>
-              <View style={styles.oneBlock}><Text>{post.police}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>경찰서</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.police}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text>소방서</Text></View>
-              <View style={styles.oneBlock}><Text>{post.fire}</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>소방서</Text></View>
+              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.fire}</Text></View>
             </View>
           </View>
       </View>

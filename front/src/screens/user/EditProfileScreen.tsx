@@ -129,7 +129,7 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
             touched={editProfile.touched.nickname}
             placeholder="닉네임을 입력해주세요."
           />
-          <View style={styles.input}>
+          {/* <View style={styles.input}>
             <Text style={styles.subtitle}>생년월일</Text>
             <InputField
               {...editProfile.getTextInputProps('nickname')}
@@ -138,7 +138,7 @@ function EditProfileScreen({navigation}: EditProfileScreenProps) {
               placeholder="생년월일을 입력해주세요."
               // style={styles.inputbox}
             />
-          </View>
+          </View> */}
       </View>
       <Pressable 
         style={styles.deleteAccountContainer}

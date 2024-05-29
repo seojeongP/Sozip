@@ -7,11 +7,13 @@ import AdditionalMoreScreen from '@/screens/addi/AdditionalMoreScreen';
 import AdditionalMoreDescScreen from '@/screens/addi/AdditionalMoreDescScreen';
 import AdditionalHomeScreen from '@/screens/addi/AdditionalHomeScreen';
 import useThemeStore from '@/store/useThemStore';
+import AdditionalMoreDesc2Screen from '@/screens/addi/AdditionalMoreDesc2Screen';
 
 export type AddiStackParamList = {
     [addiNavigations.ADDI_HOME]: undefined;
     [addiNavigations.ADDI_MORE]: undefined;
     [addiNavigations.ADDI_MORE_DESC]: undefined;
+    [addiNavigations.ADDI_MORE_DESC2]: undefined;
 };
 
 const Stack = createStackNavigator<AddiStackParamList>();
@@ -59,6 +61,15 @@ function AdditionalStackNavigator() {
           headerShown: false,
         }}
       />
+      <Stack.Screen 
+        name={addiNavigations.ADDI_MORE_DESC2} 
+        component={AdditionalMoreDesc2Screen} 
+        options={{
+          headerTitle: '이사는 너무 어려워',
+          headerShown: false,
+        }}
+      />
+      
     </Stack.Navigator>
   )
 }

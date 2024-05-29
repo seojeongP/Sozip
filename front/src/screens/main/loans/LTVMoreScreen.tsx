@@ -18,7 +18,7 @@ function LTVMoreScreen({navigation}: LTVRMoreScreenProps) {
     // <View style={styles.container}>
     //     {/* <Image style={styles.back} source={require('../../../assets/back_loan.png')}/> */}
 
-        <ScrollView style={{flex:1}}>
+        <ScrollView style={{flex:1, marginBottom: 50,}}>
             <View style={styles.description}>
                 <Text style={styles.textTitle}>담보인정비율(LTV) 계산</Text>
                 <Text style={{fontSize:12,}}>LTV(Loan to Value: 담보인정비율)은 담보 대비 대출금액의 비율을 나타내는 지표로, 주로 주택담보대출의 대출가능금액을 산출할 때 사용됩니다.</Text>
@@ -45,12 +45,12 @@ function LTVMoreScreen({navigation}: LTVRMoreScreenProps) {
 
             <View style={styles.description}>
                 <Text style={styles.subtitle}>지역별 LTV 기준 (2023년 개정 반영):</Text>
-                <Image resizeMode="contain" style={{width:'100%', height:'30%', marginTop:10, marginBottom:0}} source={require('../../../assets/region_LTV.png')}/>
+                <Image source={require('../../../assets/region_LTV.png')}/>
             </View>
 
             <View style={styles.description}>
                 <Text style={styles.subtitle}>지역별 소액임차보증금 :</Text>
-                <Image resizeMode="contain" style={{width:'100%', height:'30%', marginTop:0, marginBottom:0}} source={require('../../../assets/region_soac.png')}/>
+                <Image source={require('../../../assets/region_soac.png')}/>
             </View>
         </ScrollView>
     // </View>

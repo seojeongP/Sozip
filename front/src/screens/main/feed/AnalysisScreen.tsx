@@ -133,10 +133,11 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
         
 
       {/* ------------------------------------------------------- */}
-        {post?.category=='apart'&&<View style={[styles.chartContainer]}>
+        {post?.category=='apart'&&
+        <View style={[styles.chartContainer]}>
           <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>구별 아파트 규모 분포 비교</Text>
-            <Text style={{fontSize:13}}>{post?.title}이(가) 위치한 {post?.gu}의 아파트 규모의 분포를 비교합니다.</Text>
+            <Text style={styles.description}>{post?.title}이(가) 위치한 {post?.gu}의 아파트 규모의 분포를 비교합니다.</Text>
           </View>
           
           <View style={styles.pieChart}>
@@ -159,7 +160,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
         <View style={[styles.chartContainer, {borderBottomWidth: 0}]}>
           <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>동별 아파트 규모 분포 비교</Text>
-            <Text style={{fontSize:13}}>{post?.title}이(가) 위치한 {post?.dong}의 아파트 규모의 분포를 비교합니다.</Text>
+            <Text style={styles.description}>{post?.title}이(가) 위치한 {post?.dong}의 아파트 규모의 분포를 비교합니다.</Text>
           </View>
           
           <View style={styles.pieChart}>
@@ -193,7 +194,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
       <View style={[styles.chartContainer, {marginBottom: 50}]}>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>구별 평균 평당가격 비교</Text>
-          <Text>서울특별시 25개의 구의 평균 평당가격을 비교합니다. (만원)</Text>
+          <Text style={styles.description}>서울특별시 25개의 구의 평균 평당가격을 비교합니다. (만원)</Text>
         </View>
         <BarChart
           data={bar_data}
@@ -211,13 +212,13 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
       <View style={[styles.chartContainer, {paddingBottom:30}]}>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>동별 평당가격 분포 비교</Text>
-          <Text>{post?.title}이(가) 위치한 {post?.gu}의 속한 {third.length}개의 동의 평당가격 분포를 비교합니다. (만원)</Text>
+          <Text style={styles.description}>{post?.title}이(가) 위치한 {post?.gu}의 속한 {third.length}개의 동의 평당가격 분포를 비교합니다. (만원)</Text>
         </View>
         <View>
           <ScrollView horizontal>
             <View style={{justifyContent:'space-between', alignItems: 'flex-end', marginRight:5,}}>
               <Text>{Math.trunc(max_final)}</Text>
-              <Text style={{bottom:90}}>{Math.trunc(min_final)}</Text>
+              <Text style={{bottom:110}}>{Math.trunc(min_final)}</Text>
             </View>
           <View style={styles.boxesPlotContainer}>
           {updatedThird.map(({num, check, option, color, ...input}) => (
@@ -246,7 +247,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           <View></View>
           <View style={{alignItems: 'center'}}>
             <Text style={styles.subtitle}>각 시설별 분포 비교</Text>
-            <Text>{post?.title} 주변 시설의 분포를 확인합니다.</Text>
+            <Text style={styles.description}>{post?.title} 주변 시설의 분포를 확인합니다.</Text>
           </View>
           <RadarChart
             data={customRadarData}
@@ -270,7 +271,8 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
 
       {/* ------------------------------------------------------- */}
       {/* 6번째 그래프 */}
-      {post?.category=='apart'&&<View style={[styles.chartContainer, {marginVertical:20,}]}>
+      {post?.category=='apart'&&
+      <View style={[styles.chartContainer, {marginVertical:20, borderBottomWidth:0}]}>
           <Text style={styles.subtitle}>동일 규모내의 가격 비교</Text>
           <View style={styles.boxPlotContainer}>
             <BoxPlot 
@@ -322,7 +324,7 @@ const styling = (theme: ThemeMode, third: number) => StyleSheet.create({
     marginBottom: 20,
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: 'bold',
     paddingBottom: 10,
   },
@@ -372,6 +374,11 @@ const styling = (theme: ThemeMode, third: number) => StyleSheet.create({
     fontWeight: '800',
   },
   normal: {},
+  description: {
+    fontSize: 13, 
+    padding: 10,
+    fontFamily: ''
+  },
 });
 
 export default AnalysisScreen;

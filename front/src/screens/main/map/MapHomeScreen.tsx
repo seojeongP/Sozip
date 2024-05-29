@@ -568,7 +568,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   listButton: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 50,
     left: Dimensions.get('screen').width/2 - 50,
   },
   bottomSheet:{
@@ -667,7 +667,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     marginLeft:5,
   },
   first_modal: {
-    backgroundColor: colors[theme].WHITE, 
+    backgroundColor: colors[theme].UNCHANGE_WHITE, 
     flexDirection:'row', 
     justifyContent:'space-around', 
     bottom:1, 
@@ -676,7 +676,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   modal: {
     width: Dimensions.get('screen').width,
-    backgroundColor: colors[theme].WHITE, 
+    backgroundColor: colors[theme].UNCHANGE_WHITE, 
     flexDirection:'row', 
     justifyContent: 'space-evenly',
     position: 'absolute',

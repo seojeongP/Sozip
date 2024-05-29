@@ -1,15 +1,23 @@
-import { addiNavigations } from '@/constants';
+import { addiNavigations, colors } from '@/constants';
 import { AddiStackParamList } from '@/navigations/stack/AddtionalStackNavigator';
+import useThemeStore from '@/store/useThemStore';
+import { ThemeMode } from '@/types';
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type AdditionalMoreDescScreenProps  = StackScreenProps<AddiStackParamList, typeof addiNavigations.ADDI_MORE_DESC>;
 
-function AdditionalMoreDescScreen({}: AdditionalMoreDescScreenProps) {
+function AdditionalMoreDescScreen({navigation}: AdditionalMoreDescScreenProps) {
+  const {theme} = useThemeStore();
+  const styles = styling(theme);
   return (
     <ScrollView >
+      <SafeAreaView style={styles.headerContainer}>
+          <MaterialIcons name='keyboard-arrow-left' size={40} color={colors[theme].GRAY_400} onPress={() => navigation.goBack()}/>
+      </SafeAreaView>
       <View style={styles.container}>
       <Text style={styles.textTitle}>서울시 청년 중개. 이사비 지원사업 시작</Text>
       <View>
@@ -48,7 +56,7 @@ function AdditionalMoreDescScreen({}: AdditionalMoreDescScreenProps) {
   )
 }
 
-const styles = StyleSheet.create({
+const styling = (theme: ThemeMode)=> StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
@@ -69,6 +77,12 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 13,
     fontWeight: '300',
+  },
+  headerContainer: {
+    position: 'absolute',
+    top: 0,
+    zIndex: 1,
+    width: '100%',
   },
 });
 

@@ -3,9 +3,11 @@ import { colors, loanNavigations } from '@/constants';
 import { LoanStackParamList } from '@/navigations/stack/LoanStackNavigator';
 import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
+import { showToast } from '@/utils/showToasts';
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import Toast, { ToastConfig } from 'react-native-toast-message';
 
 type VerifyHomeScreenProps = StackScreenProps<LoanStackParamList>;
 
@@ -21,6 +23,7 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
   const [sixth, setSixth] = useState<Boolean | null>(null);
   const [seventh, setSeventh] = useState<Boolean | null>(null);
   const [eight, setEigth] = useState<Boolean | null>(null);
+
   return (
     <View style={styles.container}>
       <Image style={styles.back} source={require('../../../assets/back_loan.png')}/>
@@ -38,7 +41,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={first? styles.selected_button : styles.button}/>
                   <Text style={first? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setFirst(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                  onPress={()=>{showToast('연령 기준 미충족', '나이 조건이 맞지 않습니다.');setFirst(false)}}>
                   <View  style={first?styles.button :styles.selected_button}/>
                   <Text style={first?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -54,7 +58,9 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={second? styles.selected_button : styles.button}/>
                   <Text style={second? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setSecond(false)}>
+                <Pressable  
+                  style={styles.buttonContainer} 
+                  onPress={()=>{showToast('내국인 기준 미충족', '국적이 한국인인 경우 자격이 있습니다.');setSecond(false)}}>
                   <View  style={second?styles.button :styles.selected_button}/>
                   <Text style={second?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -72,7 +78,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={third? styles.selected_button : styles.button}/>
                   <Text style={third? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setThird(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('근로 기준 미충족', '소득이 안정적인 경우 대출이 가능합니다.');setThird(false)}}>
                   <View  style={third?styles.button :styles.selected_button}/>
                   <Text style={third?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -88,7 +95,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={fourth? styles.selected_button : styles.button}/>
                   <Text style={fourth? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setFourth(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('소득 기준 미충족', '대출 프로그램이 소득 제한을 가질 수 있습니다.');setFourth(false)}}>
                   <View  style={fourth?styles.button :styles.selected_button}/>
                   <Text style={fourth?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -106,7 +114,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={fifth? styles.selected_button : styles.button}/>
                   <Text style={fifth? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setFifth(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('신용등급 기준 미충족', '낮은 신용등급은 대출이 거부될 수 있습니다.');setFifth(false)}}>
                   <View  style={fifth?styles.button :styles.selected_button}/>
                   <Text style={fifth?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -122,7 +131,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={sixth? styles.selected_button : styles.button}/>
                   <Text style={sixth? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setSixth(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('중복 대출 제약', '이미 정부 지원을 받고 있다면, 추가 대출 승인에 제약이 있을 수 있습니다.');setSixth(false)}}>
                   <View  style={sixth?styles.button :styles.selected_button}/>
                   <Text style={sixth?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -140,7 +150,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={seventh? styles.selected_button : styles.button}/>
                   <Text style={seventh? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setSeventh(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('총 부채 수준 경고', '추가 대출에 대한 상환 능력이 부족으로 대출 승인이 어려울 수 있습니다.');setSeventh(false)}}>
                   <View  style={seventh?styles.button :styles.selected_button}/>
                   <Text style={seventh?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -156,7 +167,8 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                   <View  style={eight? styles.selected_button : styles.button}/>
                   <Text style={eight? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setEigth(false)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('주택 자산 확인', '무주택자의 경우 주거 목적의 대출 승인 가능성이 높아질 수 있습니다.');setEigth(false)}}>
                   <View  style={eight?styles.button :styles.selected_button}/>
                   <Text style={eight?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -242,15 +254,15 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   button: {
     margin: 3, 
-    width: 8,
-    height: 8,
+    width: 10,
+    height: 10,
     borderWidth: 1, 
     borderRadius: 5,
   },
   selected_button : {
     margin: 3, 
-    width: 8,
-    height: 8,
+    width: 10,
+    height: 10,
     borderWidth: 2, 
     borderRadius: 5,
     borderColor: colors[theme].BLUE_MAIN,

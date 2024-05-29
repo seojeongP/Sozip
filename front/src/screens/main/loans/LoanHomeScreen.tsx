@@ -35,15 +35,16 @@ function LoanHomeScreen({navigation}: LoanHomeScreenProps) {
             </View>
             <View style={{flexDirection: 'row'}}>
                 <TouchableOpacity onPress={()=>navigation.navigate(loanNavigations.VERIFY)}>
-                <Image resizeMode="contain"
-                    source={require('../../../assets/personal_loan.png')} />
+            {theme=='light' && <Image resizeMode="contain" source={require('../../../assets/personal_loan.png')} />}
+            {theme=='dark' && <Image resizeMode="contain" source={require('../../../assets/personal_loan_dark.png')} />}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate(loanNavigations.LTV_HOME)}>
-                <Image resizeMode="contain"
-                    source={require('../../../assets/loan_limit.png')} />
+            {theme=='light' && <Image resizeMode="contain" source={require('../../../assets/loan_limit.png')} />}
+            {theme=='dark' && <Image resizeMode="contain" source={require('../../../assets/loan_limit_dark.png')} />}
                 </TouchableOpacity>
             </View>
-            <Image resizeMode="contain" source={require('../../../assets/loan_desc.png')} />
+            {theme=='light' && <Image resizeMode="contain" source={require('../../../assets/loan_desc.png')} />}
+            {theme=='dark' && <Image resizeMode="contain" source={require('../../../assets/loan_desc_dark.png')} />}
             {/* <View style={{position:'absolute', }}>
                 <CustomButton label='오늘의 소식 더 보기' variant='filled' size='medium'/>
             </View> */}
@@ -60,7 +61,8 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
       },
       text: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: colors[theme].BLACK,
       },
       stretch_text: {
         fontSize: 20,

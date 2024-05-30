@@ -4,14 +4,17 @@ import { ThemeMode } from '@/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import { LatLng, MapMarkerProps, Marker } from 'react-native-maps';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-interface CustomMarkerProps extends MapMarkerProps {
+interface OtherMarkerProps extends MapMarkerProps {
     coordinate: LatLng;
     category: string;
+    color: string;
 }
 
-function CustomMarker({coordinate, category='location-pin', ...props}: CustomMarkerProps) {
+function OtherMarker({coordinate, category='directions-bus', color, ...props}: OtherMarkerProps) {
     const {theme} = useThemeStore();
     const styles = styling(theme);
 
@@ -19,9 +22,9 @@ function CustomMarker({coordinate, category='location-pin', ...props}: CustomMar
     <Marker coordinate={coordinate} {...props}>
         <View style={styles.container}>
                 <MaterialIcons 
-                        name={category} 
-                        color={category==='directions-bus' ? colors[theme].BLUE_MAIN: colors[theme].GRAY_700}
-                        size={25}
+                    name={category} 
+                    color={color}
+                    size={15}
                 />
         </View>
     </Marker>
@@ -45,4 +48,4 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     },
 });
 
-export default CustomMarker;
+export default OtherMarker;

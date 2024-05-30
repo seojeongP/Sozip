@@ -9,7 +9,7 @@ const FeedFavoriteList = () => {
   
   const handleRefresh = async () => {
     setIsRefresing(true);
-    await refetch()
+    await refetch();
     setIsRefresing(false);
   }
 

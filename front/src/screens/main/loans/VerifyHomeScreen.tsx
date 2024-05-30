@@ -1,13 +1,13 @@
 import CustomButton from '@/components/common/CustomButton';
 import { colors, loanNavigations } from '@/constants';
+import { alerts } from '@/constants/messages';
 import { LoanStackParamList } from '@/navigations/stack/LoanStackNavigator';
 import useThemeStore from '@/store/useThemStore';
 import { ThemeMode } from '@/types';
 import { showToast } from '@/utils/showToasts';
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useEffect, useState } from 'react';
-import {Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Toast, { ToastConfig } from 'react-native-toast-message';
+import React, { useState } from 'react';
+import {Alert, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 type VerifyHomeScreenProps = StackScreenProps<LoanStackParamList>;
 
@@ -15,14 +15,24 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
   const {theme} = useThemeStore();
   const styles = styling(theme);
 
-  const [first, setFirst] = useState<Boolean | null>(null);
-  const [second, setSecond] = useState<Boolean | null>(null);
-  const [third, setThird] = useState<Boolean | null>(null);
-  const [fourth, setFourth] = useState<Boolean | null>(null);
-  const [fifth, setFifth] = useState<Boolean | null>(null);
-  const [sixth, setSixth] = useState<Boolean | null>(null);
-  const [seventh, setSeventh] = useState<Boolean | null>(null);
-  const [eight, setEigth] = useState<Boolean | null>(null);
+  const [first, setFirst] = useState<Boolean>(true);
+  const [second, setSecond] = useState<Boolean | null>(true);
+  const [third, setThird] = useState<Boolean | null>(true);
+  const [fourth, setFourth] = useState<Boolean | null>(true);
+  const [fifth, setFifth] = useState<Boolean | null>(true);
+  const [sixth, setSixth] = useState<Boolean | null>(false);
+  const [seventh, setSeventh] = useState<Boolean | null>(false);
+  const [eight, setEigth] = useState<Boolean | null>(true);
+
+  const handlePress = () => {
+    if (first&&second&&third&&fourth&&fifth&&!sixth&&!seventh&&eight){
+      navigation.navigate(loanNavigations.BANK_SELECTION)}
+    else{
+      Alert.alert(alerts.CONTINUE_LOAN.TITLE, alerts.CONTINUE_LOAN.DESCRIPTION,[
+        {text: '조회',onPress: () => {navigation.navigate(loanNavigations.BANK_SELECTION)}},
+        {text: '취소',style: 'cancel',}],);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -127,12 +137,13 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                 <Text style={styles.question}>기존에 정부 지원 대출을 받고 계십니까?</Text>
               </View>
               <View style={styles.buttonsContainer}>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setSixth(true)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('중복 대출 제약', '이미 정부 지원을 받고 있다면, 추가 대출 승인에 제약이 있을 수 있습니다.');setSixth(true)}}>
                   <View  style={sixth? styles.selected_button : styles.button}/>
                   <Text style={sixth? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
                 <Pressable  style={styles.buttonContainer} 
-                onPress={()=>{showToast('중복 대출 제약', '이미 정부 지원을 받고 있다면, 추가 대출 승인에 제약이 있을 수 있습니다.');setSixth(false)}}>
+                onPress={()=>setSixth(false)}>
                   <View  style={sixth?styles.button :styles.selected_button}/>
                   <Text style={sixth?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -146,12 +157,12 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
                 <Text style={styles.question}>최근 3개월 이내에 다른 금융기관에서 신규 대출을 받은 적이 있습니까?</Text>
               </View>
               <View style={styles.buttonsContainer}>
-                <Pressable  style={styles.buttonContainer} onPress={()=>setSeventh(true)}>
+                <Pressable  style={styles.buttonContainer} 
+                onPress={()=>{showToast('총 부채 수준 경고', '추가 대출에 대한 상환 능력이 부족으로 대출 승인이 어려울 수 있습니다.');setSeventh(true)}}>
                   <View  style={seventh? styles.selected_button : styles.button}/>
                   <Text style={seventh? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
-                <Pressable  style={styles.buttonContainer} 
-                onPress={()=>{showToast('총 부채 수준 경고', '추가 대출에 대한 상환 능력이 부족으로 대출 승인이 어려울 수 있습니다.');setSeventh(false)}}>
+                <Pressable  style={styles.buttonContainer} onPress={()=>setSeventh(false)}>
                   <View  style={seventh?styles.button :styles.selected_button}/>
                   <Text style={seventh?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
@@ -181,7 +192,7 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
         <CustomButton style={styles.final_button} 
           label='다음' 
           size='large' 
-          onPress={()=>navigation.navigate(loanNavigations.BANK_SELECTION)}/>
+          onPress={handlePress}/>
         </View>
     </View>
   )

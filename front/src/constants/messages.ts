@@ -23,7 +23,11 @@ const errorMessages = {
     DELETE_ACCOUNT:{
       TITLE: '정말 탈퇴하시겠습니까?',
       DESCRIPTION: '회원 정보는 삭제되며, 복구할 수 없습니다.',
-    }
+    },
+    CONTINUE_LOAN:{
+      TITLE: '대출 상품을 조회하시겠습니까?',
+      DESCRIPTION: '대출 신청 자격 기준 중 충족하지 못하는 항목이 있습니다.',
+    },
   } as const;
   
   export {errorMessages, alerts};

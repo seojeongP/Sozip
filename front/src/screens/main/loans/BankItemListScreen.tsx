@@ -53,13 +53,13 @@ function BankItemListScreen({route, navigation}: BankItemListScreenProps) {
             <Pressable onPress={()=>handlePress('ur', "징검다리전세자금보증 주택전세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
-                title={"징검다리전세자금보증 주택전세자금대출"} 
+                title={"징검다리전세자금보증 대출"} 
                 desc={"제2금융권 전세자금대출을 상환할 목적으로 설계된 금융상품"}/></Pressable>}
             {bank_name=='kb'&&
             <Pressable onPress={()=>handlePress('ur', "KB 청년 맞춤형 전·월세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
-                title={"KB 청년 맞춤형 전·월세자금대출"} 
+                title={"청년 맞춤형 전·월세자금대출"} 
                 desc={"무주택 청년을 위한 금융위원회 정책 상품"}/></Pressable>}
 
             {bank_name=='hn'&&
@@ -111,7 +111,7 @@ function BankItemListScreen({route, navigation}: BankItemListScreenProps) {
             <Pressable onPress={()=>handlePress('kb', "임대주택 입주자 특례보증 전세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
-                title={"임대주택 입주자 특례보증 전세자금대출"} 
+                title={"임대주택 특례보증 전세대출"} 
                 desc={"주택법상 주택이면 주택금융신용보증서를 담보로 월세자금을 지원"}/></Pressable>}
             {bank_name=='kb'&&
             <Pressable onPress={()=>handlePress('kb', "KB주택담보대출")}>

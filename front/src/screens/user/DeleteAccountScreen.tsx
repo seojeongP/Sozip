@@ -27,7 +27,7 @@ function DeleteAccountScreen({}: DeleteAccountScreenProps) {
                     onPress: () => deleteAccountMutation.mutate(null, {
                         onSuccess: ()=>
                             Toast.show({
-                                type:'sucess',
+                                type:'success',
                                 text1: '탈퇴가 완료되었습니다.',
                                 position: 'bottom',
                         }),

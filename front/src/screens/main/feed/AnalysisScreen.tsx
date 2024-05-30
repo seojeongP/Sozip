@@ -12,6 +12,7 @@ import BoxPlot from '@/components/feed/BoxPlot';
 import useGetAnalysis from '@/hooks/queries/useGetAnalysis';
 import BoxesPlot from '@/components/feed/BoxesPlot';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 
 
 type AnalysisScreenProps = StackScreenProps<FeedStackParamList,typeof feedNavigations.ANALYSIS>;
@@ -149,6 +150,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             textSize={12}
             labelsPosition='mid'
             data={pieData}
+            key={1}
           />
           </View>
         </View>}
@@ -172,6 +174,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             textSize={12}
             labelsPosition='mid'
             data={pieData_2}
+            key={2}
           />
           </View>
         </View>}
@@ -283,6 +286,8 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
                 my={((post.price - fourth.min) / (fourth.max - fourth.min)) * (300 - 20) + 20}
             />
           </View>
+          <Text style={[styles.description, {fontSize: 15}]}>{post?.title}가 속해있는 {house_scale}의 아파트과의 비교입니다.</Text>
+          <Text style={[styles.description, {fontSize: 15}]}>{post?.title}의 가격을 빨간 점섬을 통해 다른 매물과 비교를 할 수 있습니다</Text>
         </View>}
       </View>
     </ScrollView>

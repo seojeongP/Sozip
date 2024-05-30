@@ -160,69 +160,69 @@ const FeedDatailScreen = ({route, navigation}: FeedDetailScreenProps) => {
       
           <View style={styles.tableContainer}>
             <View style={[styles.oneRow]}>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>가장 가까운 시설 정보</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>거리(m)</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, alignItems:'center'}]}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설</Text></View>
+              <View style={[styles.oneBlock, {flex: 4, alignItems:'center'}]}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>가장 가까운 시설 정보</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>거리(m)</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>버스 정류장</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.bus}</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_bus}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2}]}><Text style={{color:colors[theme].BLACK}}>버스 정류장</Text></View>
+              <View style={[styles.oneBlock, {flex: 4}]}><Text style={{color:colors[theme].BLACK}}>{post.bus}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{color:colors[theme].BLACK}}>{post.dis_bus}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>지하철역</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.metro}</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_metro}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2}]}><Text style={{color:colors[theme].BLACK}}>지하철역</Text></View>
+              <View style={[styles.oneBlock, {flex: 4}]}><Text style={{color:colors[theme].BLACK}}>{post.metro}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{color:colors[theme].BLACK}}>{post.dis_metro}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>초등학교</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.elementary}</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_elementary}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2}]}><Text style={{color:colors[theme].BLACK}}>초등학교</Text></View>
+              <View style={[styles.oneBlock, {flex: 4}]}><Text style={{color:colors[theme].BLACK}}>{post.elementary}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{color:colors[theme].BLACK}}>{post.dis_elementary}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>중학교</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.middle}</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_middle}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2}]}><Text style={{color:colors[theme].BLACK}}>중학교</Text></View>
+              <View style={[styles.oneBlock, {flex: 4}]}><Text style={{color:colors[theme].BLACK}}>{post.middle}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{color:colors[theme].BLACK}}>{post.dis_middle}</Text></View>
             </View>
             <View style={[styles.oneRow, {borderBottomEndRadius: 10,borderBottomStartRadius: 10,}]}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>고등학교</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.high}</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.dis_high}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2}]}><Text style={{color:colors[theme].BLACK}}>고등학교</Text></View>
+              <View style={[styles.oneBlock, {flex: 4}]}><Text style={{color:colors[theme].BLACK}}>{post.high}</Text></View>
+              <View style={[styles.oneBlock, {flex: 2, borderRightWidth:0, alignItems:'flex-end'}]}><Text style={{color:colors[theme].BLACK}}>{post.dis_high}</Text></View>
             </View>
           </View>
 
           <View style={styles.tableContainer}>
             <View style={[styles.oneRow]}>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설 (1.3km)</Text></View>
-              <View style={styles.oneBlock}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>개수</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, alignItems:'center'}]}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>주변 시설 (1.3km)</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, marginRight:10, alignItems:'center'}]}><Text style={{fontWeight: '700', color:colors[theme].BLACK}}>개수</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>편의점 (300m)</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.conv}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>편의점 (300m)</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.conv}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>대형마트</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.mart}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>대형마트</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.mart}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>약국 (300m)</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.pharmacy}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>약국 (300m)</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.pharmacy}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>병원</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.hospital}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>병원</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.hospital}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>공공도서관</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.lib}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>공공도서관</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.lib}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>경찰서</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.police}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>경찰서</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.police}</Text></View>
             </View>
             <View style={styles.oneRow}>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>소방서</Text></View>
-              <View style={styles.oneBlock}><Text style={{color:colors[theme].BLACK}}>{post.fire}</Text></View>
+              <View style={[styles.oneBlock, {flex: 1}]}><Text style={{color:colors[theme].BLACK}}>소방서</Text></View>
+              <View style={[styles.oneBlock, {flex: 1, borderRightWidth:0, alignItems:'flex-end', marginRight:10}]}><Text style={{color:colors[theme].BLACK}}>{post.fire}</Text></View>
             </View>
           </View>
       </View>
@@ -366,8 +366,8 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   tableContainer: {
     flex: 5,
     margin: 5,
-    gap: 10,
-    marginTop: 20,
+    gap: 5,
+    // marginTop: 20,
     borderWidth: 1,
     borderColor: colors[theme].GRAY_700,
     borderRadius: 10,
@@ -384,6 +384,11 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   oneBlock: {
     // borderRightColor: colors[theme].GRAY_700,
     // borderRightWidth: 0.7,
+    padding:5,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    borderRightColor: colors[theme].GRAY_400,
+    borderRightWidth: 1,
   },
 });
 

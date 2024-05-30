@@ -21,7 +21,8 @@ import useThemeStore from '@/store/useThemStore';
 import 'react-native-svg'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const toastConfig = {
+
+const toastConfig_origin: ToastConfig = {
   success: (props:BaseToastProps) => (
     <BaseToast
       {...props}
@@ -49,12 +50,36 @@ const toastConfig = {
   ),
 }
 
-
 function App() {
   const {theme} = useThemeStore();
 
   const toastConfig: ToastConfig = {
-    selectedToast: ({text1, text2}) => (
+    success: (props:BaseToastProps) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: colors['light'].BLUE_500 }}
+        text1Style={{
+          fontSize: 14,
+        }}
+        text2Style={{
+          fontSize: 12,
+        }}
+      />
+    ),
+    
+    error: (props:BaseToastProps) => (
+      <ErrorToast
+        {...props}
+        style={{ borderLeftColor: colors['light'].RED_500 }}
+        text1Style={{
+          fontSize: 14,
+        }}
+        text2Style={{
+          fontSize: 12,
+        }}
+      />
+    ),
+    selectedToast: ({text1, text2, props}) => (
       <View
         style={{
           flex: 1,
@@ -92,12 +117,14 @@ function App() {
       </View>
     ),
   };
+
   return (
     <QueryClientProvider client={queryClient}>
       <StatusBar barStyle={theme === 'light'? 'dark-content':'light-content'}/>
       <NavigationContainer>
         <RootNavigator />
         <Toast config={toastConfig}/>
+        {/* <Toast config={toastConfig_origin}/> */}
       </NavigationContainer>
     </QueryClientProvider>
   ); 

@@ -213,7 +213,7 @@ function LTVHomeScreen({navigation}: LTVHomeScreenProps) {
               <View style={styles.oneRow}>
                 <View style={[styles.resultBox, {flex:0.3,}, ]}><Text>5</Text></View>
                 <View style={[styles.resultBox, {flex:3.4,}, ]}><Text>소액보증금</Text></View>
-                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>금액</Text></View>
+                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>55000000</Text></View>
                 <View style={[styles.resultBox, {flex:4,}, ]}><Text>지역별 소액보증금</Text></View>
               </View>
               <View style={styles.oneRow}>
@@ -225,13 +225,13 @@ function LTVHomeScreen({navigation}: LTVHomeScreenProps) {
               <View style={styles.oneRow}>
                 <View style={[styles.resultBox, {flex:0.3,}, ]}><Text>7</Text></View>
                 <View style={[styles.resultBox, {flex:3.4,}, ]}><Text style={{fontSize:12}}>대출금액</Text></View>
-                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>금액</Text></View>
+                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>400000000</Text></View>
                 <View style={[styles.resultBox, {flex:4,}]}><Text style={{fontSize:9}}>대출금+보증금+선순위채권</Text></View>
               </View>
               <View style={[styles.oneRow, {backgroundColor: colors[theme].PURPLE_400}]}>
                 <View style={[styles.resultBox, {flex:0.3,}, ]}><Text>8</Text></View>
                 <View style={[styles.resultBox, {flex:3.4,}, ]}><Text>LTV</Text></View>
-                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>금액</Text></View>
+                <View style={[styles.resultBox, {flex:2.7,}, ]}><Text>80%</Text></View>
                 <View style={[styles.resultBox, {flex:4,}, ]}><Text style={{fontSize:10}}>대출금액 / 담보가치 x 100</Text></View>
               </View>
             </View>

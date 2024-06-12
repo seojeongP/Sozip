@@ -21,8 +21,8 @@ function LTVMoreScreen({navigation}: LTVRMoreScreenProps) {
         <ScrollView style={{flex:1, marginBottom: 50,}}>
             <View style={styles.description}>
                 <Text style={styles.textTitle}>담보인정비율(LTV) 계산</Text>
-                <Text style={{fontSize:12,}}>LTV(Loan to Value: 담보인정비율)은 담보 대비 대출금액의 비율을 나타내는 지표로, 주로 주택담보대출의 대출가능금액을 산출할 때 사용됩니다.</Text>
-                <Text style={{fontSize:12,}}>LTV 기준비율은 지역에 따라 다르며, 20~70% 수준입니다. 아래 '지역별 LTV 기준'에서 확인할 수 있습니다.</Text>
+                <Text style={styles.descriptionText}>LTV(Loan to Value: 담보인정비율)은 담보 대비 대출금액의 비율을 나타내는 지표로, 주로 주택담보대출의 대출가능금액을 산출할 때 사용됩니다.</Text>
+                <Text style={styles.descriptionText}>LTV 기준비율은 지역에 따라 다르며, 20~70% 수준입니다. 아래 '지역별 LTV 기준'에서 확인할 수 있습니다.</Text>
             </View>
 
             <View style={styles.description}>
@@ -66,6 +66,10 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         padding: 20,
         gap: 10,
       },
+      descriptionText:{
+        color: colors[theme].BLACK,
+        fontSize: 12,
+      },
       textTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -77,10 +81,12 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         color: colors[theme].BLUE_MAIN,
       },
       normal:{
+        color: colors[theme].BLACK,
         fontSize: 12,
         fontWeight: '400',
       },
       tt: {
+        color: colors[theme].BLACK,
         fontSize: 13,
         fontWeight: '600',
       },

@@ -24,25 +24,37 @@ function AdditionalMoreDesc2Screen({navigation}: AdditionalMoreDescScreenProps) 
         <Text style={styles.Title}>청년 행복주택</Text>
       </View>
       <View style={{gap: 10}}>
-        <Text style={styles.subTitle}>🏠 행복주택</Text>
-        <Text style={styles.description}>행복주택은 대학생, 청년, 신혼부부를 위한 공공 임대주택으로, 주변 시세 대비 60~80% 저렴한 임대료가 장점입니다. 교통이 편리한 곳에 위치하며, 입주 자격은 무주택자, 소득 기준, 자산 및 자동차 가액 조건을 충족해야 합니다. 청년은 최대 6년, 신혼부부는 최대 10년, 주거급여 수급자와 고령자는 최대 20년까지 거주 가능합니다.</Text>
+        <Text style={styles.subTitle}>💍 신혼부동산 정책 및 청년 주거부담 완화 대책</Text>
+        <Text style={styles.description}>올해는 신혼부부를 위한 부동산 정책과 청년들의 주거 부담을 낮춰주는 제도가 새롭게 도입됩니다.</Text>
       </View>
 
       <View style={{gap: 10}}>
-        <Text style={styles.subTitle}>🧑‍🧑‍🧒‍🧒 기숙사형 청년주택</Text>
-        <Text style={styles.description}>기숙사형 청년주택은 대학교 인근 다가구 주택이나 오피스텔을 기숙사로 운영하는 형태입니다. 세탁기, 냉장고, 책상, 침대 등 기본 시설이 제공되며, 시세의 40% 수준의 임대료로 최대 6년간 거주할 수 있습니다. 대학생, 대학원생, 무주택자, 소득 기준을 충족하는 미혼 청년이 입주 가능합니다.</Text>
+        <Text style={styles.subTitle}>🤍 혼인에 따른 증여재산 공제</Text>
+        <Text style={styles.description}>올해 1월1일부터 혼인한 이후 증여받는 분들을 대상으로 '혼인에 따른 증여재산 공제'가 신설됩니다. 직계존속인 증여자가 혼인신고일 전후 2년 이내(총 4년)에 증여한 재산 1억원까지 추가 공제가 가능해졌습니다.</Text>
       </View>
 
       <View style={{gap: 10}}>
-        <Text style={styles.subTitle}>💰 청년 매입임대주택 및 전세임대주택</Text>
-        <Text style={styles.description}>청년 매입임대주택은 기존 주택을 매입 후 리모델링하여 저렴하게 공급하는 공공 임대주택입니다. 시세보다 4050% 저렴하며, 기본 가구와 가전이 제공됩니다. 청년과 취업준비생이 입주할 수 있습니다.청년 전세임대주택은 공공주택사업자가 주택과 전세계약을 맺고 청년에게 저렴하게 임대해주는 형태입니다. 수도권 1.2억원, 광역시 9500만원, 기타 지역 8500만원의 전세금 지원이 가능하며, 12%의 이자를 임대료로 납부합니다. 청년과 졸업 후 2년 이내 미취업자도 신청 가능합니다.</Text>
+        <Text style={styles.subTitle}>👶🏻 출산 가구를 위한 특례 구입 및 전세자금 대출</Text>
+        <Text style={styles.description}>출산한 무주택 가구를 대상으로 저금리 구입 자금 대출을 해주는 특례 구입‧전세자금 대출이 올해 1월부터 시행됩니다. 주택 가액 9억원까지 대출이 가능하며, 신생아 특례 전세자금 대출도 제공됩니다.</Text>
       </View>
 
       <View style={{gap: 10}}>
-        <Text style={styles.subTitle}>🚉 역세권 청년주택</Text>
-        <Text style={styles.description}>역세권 청년주택은 역세권에 위치한 공공주택으로, 시세 대비 60~80% 저렴한 임대료를 제공합니다. 임대 보증금의 50%를 무이자로 지원하며, 월 20만원의 임차료를 최대 10개월 동안 지원합니다. 다양한 금융지원도 제공됩니다.</Text>
+        <Text style={styles.subTitle}>💰 출산 가구에 대한 분양 혜택 확대</Text>
+        <Text style={styles.description}>출산 가구를 위한 분양 혜택도 다양하게 제공됩니다. 연 7만호 수준의 특별‧우선 공급이 신설되며, 입주자 모집 공고일 기준 2세 이하 자녀가 있는 가구에 대한 특별공급이 이뤄집니다.</Text>
       </View>
-      <Text style={styles.textTitle}>청년 행복주택을 통해 경제적이고 편리한 주거 환경을 마련해 보세요!</Text>
+      <View style={{gap: 10}}>
+        <Text style={styles.subTitle}>🏠 청년을 위한 부동산 정책 개선</Text>
+        <Text style={styles.description}>청년들을 위한 부동산 정책도 개선됩니다. 중복 청약 시 부부 개별 신청이 가능하며, 민간의 일반공급 가점제 청약 시 배우자의 청약통장 가입 기간이 합산되어 신혼가구가 분양 당첨에 유리해집니다.</Text>
+      </View>
+      <View style={{gap: 10}}>
+        <Text style={styles.subTitle}>🏦 청년 주택 드림 청약통장</Text>
+        <Text style={styles.description}>2월에 출시되는 '청년 주택 드림 청약통장'을 통해 청년들은 저리‧장기 자금을 지원받을 수 있습니다. 만 39세 이하 무주택자가 가입해 분양가 6억원 이하 주택을 분양받을 경우 금리 최저 2.2%로 대출이 가능합니다.</Text>
+      </View>
+      <View style={{gap: 10}}>
+        <Text style={styles.subTitle}>🏠 공공분양주택 공급 확대</Text>
+        <Text style={styles.description}>장기적으로는 시세의 70%~80% 수준의 부담 가능한 공공분양주택을 5년간 34만호에게 공급할 예정입니다.</Text>
+      </View>
+      <Text style={styles.textTitle}>이러한 정책들을 통해 신혼부부와 청년들의 주거 부담을 줄여주고, 안정적인 주거 환경을 조성하는 데 기여할 것으로 기대됩니다.</Text>
       </View>
     </ScrollView>
   )
@@ -55,18 +67,22 @@ const styling = (theme: ThemeMode)=> StyleSheet.create({
     gap: 20,
   },
   textTitle: {
+    color: colors[theme].BLACK,
     fontSize: 17,
     fontWeight: '500',
   },
   Title: {
+    color: colors[theme].BLACK,
     fontSize: 20,
     fontWeight: '800',
   },
   subTitle: {
+    color: colors[theme].BLACK,
     fontSize: 15,
     fontWeight: '500',
   },
   description: {
+    color: colors[theme].BLACK,
     fontSize: 13,
     fontWeight: '300',
   },

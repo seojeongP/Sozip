@@ -51,7 +51,13 @@ const addiNavigations = {
     ADDI_HOME: 'AdditionalHome',
     ADDI_MORE: 'AdditionalMore',
     ADDI_MORE_DESC: 'AdditionalMoreDesc',
-    ADDI_MORE_DESC2: 'AdditionalMoreDesc2Screen',
+    ADDI_MORE_DESC2: 'AdditionalMoreDesc2',
+    ADDI_MORE_DESC3: 'AdditionalMoreDesc3',
+    ADDI_MORE_DESC4: 'AdditionalMoreDesc4',
+    ADDI_MORE_DESC5: 'AdditionalMoreDesc5',
+    ADDI_MORE_DESC6: 'AdditionalMoreDesc6',
+    ADDI_MORE_DESC7: 'AdditionalMoreDesc7',
+    ADDI_MORE_DESC8: 'AdditionalMoreDesc8',
 } as const;
 
 export {authNavigations, mainNavigations, mapNavigations, feedNavigations, loanNavigations, addiNavigations,settingNavigations}

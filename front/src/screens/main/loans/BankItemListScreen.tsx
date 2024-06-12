@@ -44,40 +44,40 @@ function BankItemListScreen({route, navigation}: BankItemListScreenProps) {
                 desc={"주택법상 주택이면 주택금융신용보증서를 담보로 월세자금을 지원"}/></Pressable>}
 
             {bank_name=='kb'&&
-            <Pressable onPress={()=>handlePress('ur', "청년전용 버팀목전세자금대출")}>
+            <Pressable onPress={()=>handlePress('kb', "청년전용 버팀목전세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"청년전용 버팀목전세자금대출"} 
                 desc={"청년 세대주를 위한 전세대출이며 임차보증금의 80% 내에서 최대 2억원까지 지원"}/></Pressable>}
             {bank_name=='kb'&&
-            <Pressable onPress={()=>handlePress('ur', "징검다리전세자금보증 주택전세자금대출")}>
+            <Pressable onPress={()=>handlePress('kb', "징검다리전세자금보증 주택전세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"징검다리전세자금보증 대출"} 
                 desc={"제2금융권 전세자금대출을 상환할 목적으로 설계된 금융상품"}/></Pressable>}
             {bank_name=='kb'&&
-            <Pressable onPress={()=>handlePress('ur', "KB 청년 맞춤형 전·월세자금대출")}>
+            <Pressable onPress={()=>handlePress('kb', "KB 청년 맞춤형 전·월세자금대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"청년 맞춤형 전·월세자금대출"} 
                 desc={"무주택 청년을 위한 금융위원회 정책 상품"}/></Pressable>}
 
             {bank_name=='hn'&&
-            <Pressable onPress={()=>handlePress('ur', "하나 청년전세론")}>
+            <Pressable onPress={()=>handlePress('hn', "하나 청년전세론")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"하나 청년전세론"} 
                 desc={"만 19세 이상 34세 이하 무주택 세대주를 대상"}/></Pressable>}
 
             {bank_name=='kakao'&&
-            <Pressable onPress={()=>handlePress('ur', "카카오뱅크 전월세보증금 대출")}>
+            <Pressable onPress={()=>handlePress('kakao', "카카오뱅크 전월세보증금 대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"카카오뱅크 전월세보증금 대출"} 
                 desc={"주거 부담 경감을 목표로 한 금융 상품"}/></Pressable>}
 
             {bank_name=='toss'&&
-            <Pressable onPress={()=>handlePress('ur', "토스 전월세 보증금 대출")}>
+            <Pressable onPress={()=>handlePress('toss', "토스 전월세 보증금 대출")}>
                 <LoanItemBlock 
                 name={bank_name} 
                 title={"토스 전월세 보증금 대출"} 
@@ -153,6 +153,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         width: '20%',
     },
     realtitleText: {
+        color: colors[theme].BLACK,
         fontSize: 20,
         fontWeight: '600',
         marginLeft: 20,

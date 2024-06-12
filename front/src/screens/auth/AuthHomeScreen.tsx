@@ -54,8 +54,8 @@ function AuthHomeScreen({navigation}: AuthHomeScreenProps) {
         />
       </View>
       <View style={{margin: 30, alignItems: 'center', gap:15}}>
-        <Text style={{fontSize: 18, fontWeight: '800'}}>청춘 소비기반 집 구하기</Text>
-        <Text style={{fontSize: 14}}>로그인을 해주세요.</Text>
+        <Text style={{fontSize: 18, fontWeight: '800', color:colors[theme].BLACK}}>청춘 소비기반 집 구하기</Text>
+        <Text style={{fontSize: 14, color:colors[theme].BLACK}}>로그인을 해주세요.</Text>
       </View>
       <View style={styles.buttonContainer}>
           <CustomButton

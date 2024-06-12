@@ -6,7 +6,6 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import {Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Octicons from 'react-native-vector-icons/Octicons';
 
 
 type AdditionalMoreScreenProps = StackScreenProps<AddiStackParamList, typeof addiNavigations.ADDI_MORE>;
@@ -32,7 +31,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_1.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC2)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10,
                           shadowColor: colors[theme].GRAY_500,
@@ -41,7 +40,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_2.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC3)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10,
                           shadowColor: colors[theme].GRAY_500,
@@ -50,7 +49,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_4.png')} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC2)}>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC4)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10,
                           shadowColor: colors[theme].GRAY_500,
@@ -59,7 +58,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_3.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC5)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10,
                           shadowColor: colors[theme].GRAY_500,
@@ -68,7 +67,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_5.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC6)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10, 
                           shadowColor: colors[theme].GRAY_500,
@@ -77,7 +76,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_6.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC7)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10, left: 10,
                           shadowColor: colors[theme].GRAY_500,
@@ -86,7 +85,7 @@ function AdditionalMoreScreen({navigation}: AdditionalMoreScreenProps) {
                           shadowRadius: 5,}}
                 source={require('../../assets/news_7.png')} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate(addiNavigations.ADDI_MORE_DESC8)}>
             <Image resizeMode="contain" 
                   style={{borderRadius: 10, 
                           shadowColor: colors[theme].GRAY_500,

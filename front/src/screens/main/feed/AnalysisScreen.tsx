@@ -139,6 +139,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>구별 아파트 규모 분포 비교</Text>
             <Text style={styles.description}>{post?.title}이(가) 위치한 {post?.gu}의 아파트 규모의 분포를 비교합니다.</Text>
+            <Text style={styles.description}>{post?.title}은(는) {house_scale}에 속합니다.</Text>
           </View>
           
           <View style={styles.pieChart}>
@@ -163,6 +164,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           <View style={{alignItems: 'center'}}>
           <Text style={styles.subtitle}>동별 아파트 규모 분포 비교</Text>
             <Text style={styles.description}>{post?.title}이(가) 위치한 {post?.dong}의 아파트 규모의 분포를 비교합니다.</Text>
+            <Text style={styles.description}>{post?.title}은(는) {house_scale}에 속합니다.</Text>
           </View>
           
           <View style={styles.pieChart}>
@@ -183,11 +185,11 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
         <View style={styles.list}>
           <View style={styles.listContainer}>
             <Text style={styles.subtitle}>규모 구분 기준</Text>
-            <Text>소형  : 40㎡미만 </Text>
-            <Text>중소형 : 40㎡≤ ≤ 62.8㎡</Text>
-            <Text>중형  : 62.8㎡≤ ≤95.86㎡</Text>
-            <Text>중대형 : 95.86㎡≤ ≤135㎡</Text>
-            <Text>대형  : 135㎡이상</Text>
+            <Text style={{color: colors[theme].BLACK}}>소형  : 40㎡미만 </Text>
+            <Text style={{color: colors[theme].BLACK}}>중소형 : 40㎡≤ ≤ 62.8㎡</Text>
+            <Text style={{color: colors[theme].BLACK}}>중형  : 62.8㎡≤ ≤95.86㎡</Text>
+            <Text style={{color: colors[theme].BLACK}}>중대형 : 95.86㎡≤ ≤135㎡</Text>
+            <Text style={{color: colors[theme].BLACK}}>대형  : 135㎡이상</Text>
           </View>
         </View>}
 
@@ -206,6 +208,8 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           barWidth={20}
           spacing={18}
           rotateLabel
+          capColor={colors[theme].BLACK}
+          key={3}
         />
       </View>
 
@@ -220,11 +224,11 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
         <View>
           <ScrollView horizontal>
             <View style={{justifyContent:'space-between', alignItems: 'flex-end', marginRight:5,}}>
-              <Text>{Math.trunc(max_final)}</Text>
-              <Text style={{bottom:110}}>{Math.trunc(min_final)}</Text>
+              <Text style={{color:colors[theme].BLACK}}>{Math.trunc(max_final)}</Text>
+              <Text style={{bottom:110, color:colors[theme].BLACK}}>{Math.trunc(min_final)}</Text>
             </View>
           <View style={styles.boxesPlotContainer}>
-          {updatedThird.map(({num, check, option, color, ...input}) => (
+          {updatedThird.map(({num, check, option, color, ...input}, index) => (
               <View style={styles.oneBox}>
               <BoxesPlot 
                   width={50} 
@@ -234,6 +238,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
                   my={Number(post?.price)}
                   min_final={min_final}
                   max_final={max_final}
+                  key={4+index}
                 />
                 <Text style={option==post?.dong?styles.selectedText:styles.normal}>{option}</Text>
                 {option==post?.dong&&<MaterialIcons name='arrow-upward' style={{color:colors[theme].RED_700}}/>}
@@ -253,6 +258,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             <Text style={styles.description}>{post?.title} 주변 시설의 분포를 확인합니다.</Text>
           </View>
           <RadarChart
+            key= {100}
             data={customRadarData}
             size={350}
             gradientColor={{
@@ -263,7 +269,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
             stroke={['#FFE8D3', '#FFE8D3', '#FFE8D3', '#FFE8D3', '#ff9532']}
             strokeWidth={[0.5, 0.5, 0.5, 0.5, 1]}
             strokeOpacity={[1, 1, 1, 1, 0.13]}
-            labelColor="#433D3A"
+            labelColor={colors[theme].BLACK}
             dataFillColor="#FF9432"
             dataFillOpacity={0.8}
             dataStroke='salmon'
@@ -279,6 +285,7 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
           <Text style={styles.subtitle}>동일 규모내의 가격 비교</Text>
           <View style={styles.boxPlotContainer}>
             <BoxPlot 
+                key={101}
                 width={300} 
                 height={320} 
                 data={boxPlotData} 
@@ -286,8 +293,9 @@ function AnalysisScreen({route, navigation}: AnalysisScreenProps) {
                 my={((post.price - fourth.min) / (fourth.max - fourth.min)) * (300 - 20) + 20}
             />
           </View>
-          <Text style={[styles.description, {fontSize: 15}]}>{post?.title}가 속해있는 {house_scale}의 아파트과의 비교입니다.</Text>
+          <Text style={[styles.description, {fontSize: 15}]}>{post?.title}가 속해있는 {house_scale}의 아파트와의 비교입니다.</Text>
           <Text style={[styles.description, {fontSize: 15}]}>{post?.title}의 가격을 빨간 점섬을 통해 다른 매물과 비교를 할 수 있습니다</Text>
+          <Text style={[styles.description, {fontSize: 15}]}>(네모 박스는 전체 매물의 25-75%의 매물의 분포를 나타냅니다.)</Text>
         </View>}
       </View>
     </ScrollView>
@@ -329,6 +337,7 @@ const styling = (theme: ThemeMode, third: number) => StyleSheet.create({
     marginBottom: 20,
   },
   subtitle: {
+    color: colors[theme].BLACK,
     fontSize: 17,
     fontWeight: 'bold',
     paddingBottom: 10,
@@ -378,8 +387,11 @@ const styling = (theme: ThemeMode, third: number) => StyleSheet.create({
     color: colors[theme].RED_700,
     fontWeight: '800',
   },
-  normal: {},
+  normal: {
+    color:colors[theme].BLACK,
+  },
   description: {
+    color: colors[theme].BLACK,
     fontSize: 13, 
     padding: 10,
     fontFamily: ''

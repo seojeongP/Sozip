@@ -21,6 +21,7 @@ function LoanHomeScreen({navigation}: LoanHomeScreenProps) {
   
   return (
     <SafeAreaView style={styles.container}>
+        <Image style={styles.back} source={require('../../../assets/back_loan.png')}/>
         <View style={{gap: 30}}>
             <View style={{gap: 10,}}>
                 <View style={{flexDirection:'row',paddingTop: 10, marginLeft: 20}}>
@@ -68,6 +69,14 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: colors[theme].BLUE_MAIN,
+      },
+      back: {
+        position: 'absolute',
+        width: '80%',
+        height: '50%',
+        right: -50,
+        bottom: -100,
+        opacity: 0.8,
       },
 });
 

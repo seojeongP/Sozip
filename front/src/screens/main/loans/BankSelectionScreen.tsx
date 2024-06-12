@@ -32,7 +32,7 @@ function BankSelectionScreen({navigation}: BankSelectionScreenProps) {
                 </Pressable>
                 <Pressable style={styles.logoContainer} onPress={()=>handleBankPress('kb')}>
                     <Image source={require('../../../assets/bank/kb.png')} style={styles.imageContainer}/>
-                    <Text style={styles.text}>kb국민은행</Text>
+                    <Text style={styles.text}>KB국민은행</Text>
                 </Pressable>
                 <Pressable style={styles.logoContainer} onPress={()=>handleBankPress('hn')}>
                     <Image source={require('../../../assets/bank/hn.png')} style={styles.imageContainer}/>
@@ -68,6 +68,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         width: '100%',
     },
     titleText: {
+        color: colors[theme].BLACK,
         marginLeft: 30,
         fontSize: 23,
         fontWeight: '700',
@@ -99,6 +100,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
         resizeMode: "cover",
     },
     text: {
+        color: colors[theme].BLACK,
         fontSize: 15,
         fontWeight: '600',
     },

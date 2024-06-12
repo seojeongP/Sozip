@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import {
   Dimensions,
-  SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
-  useColorScheme,
   View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStackNavigator from './src/navigations/stack/AuthStackNavigator';
 import { QueryClientProvider } from '@tanstack/react-query';
 import RootNavigator from './src/navigations/root/RootNavigator';
 import queryClient from './src/api/queryClient';
@@ -111,6 +106,46 @@ function App() {
             fontSize: 15,
             width: Dimensions.get('screen').width/1.7,
           }} numberOfLines={2} ellipsizeMode="tail">
+          {text2}
+        </Text>
+        </View>
+      </View>
+    ),
+
+    selectedToast_2: ({text1, text2, text3, props}) => (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'flex-start',
+          bottom: 320,
+          height: 230,
+          width: Dimensions.get('window').width - 60,
+          backgroundColor: colors[theme].GRAY_100, 
+          borderWidth: 1, 
+          borderColor: colors[theme].BLACK,
+          padding: 20,
+          borderRadius: 20,
+          gap: 20,
+        }}>
+        <View style={{flexDirection: 'row', alignItems: 'center', gap: 10,}}>
+          <MaterialIcons name='error-outline' size={30} color={colors[theme].BLACK}/>
+          <Text
+          style={{
+            color: colors[theme].BLACK,
+            fontSize: 17,
+            fontWeight: '600',
+          }}>
+          {text1}
+        </Text>
+        </View>
+        
+        <View style={{gap: 20, paddingLeft: 10,}}>
+
+        <Text
+          style={{
+            color: colors[theme].BLACK,
+            fontSize: 15,
+          }} >
           {text2}
         </Text>
         </View>

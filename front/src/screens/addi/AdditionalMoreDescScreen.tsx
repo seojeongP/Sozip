@@ -63,18 +63,22 @@ const styling = (theme: ThemeMode)=> StyleSheet.create({
     gap: 20,
   },
   textTitle: {
+    color: colors[theme].BLACK,
     fontSize: 17,
     fontWeight: '500',
   },
   Title: {
+    color: colors[theme].BLACK,
     fontSize: 20,
     fontWeight: '800',
   },
   subTitle: {
+    color: colors[theme].BLACK,
     fontSize: 15,
     fontWeight: '500',
   },
   description: {
+    color: colors[theme].BLACK,
     fontSize: 13,
     fontWeight: '300',
   },

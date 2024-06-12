@@ -9,7 +9,6 @@ import { MainStackParamList } from '@/navigations/stack/MainStackNavigator';
 import CustomButton from '@/components/common/CustomButton';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import FontAwesome6_Regular from 'react-native-vector-icons/FontAwesome6'
 import CustomMarker from '@/components/common/CustomMarker';
 import useGetMarkers from '@/hooks/queries/useGetMarkers'
 import useModal from '@/hooks/useModal';
@@ -106,17 +105,6 @@ function MapHomeScreen() {
   const [fire, setFire] = useState<Boolean>(false);
 
   const markerModal = useModal();
-  // usePermission();
-
-  // console.log("왜 못 받아와");
-  // console.log("markers", markers);
-  // console.log('buses', buses);
-
-
-  const busList = [{"id": 0, "latitude": 126.8892689, "longitude": 37.51685884, "which": "bus"}, {"id": 1, "latitude": 127.002202, "longitude": 37.545795, "which": "bus"}, {"id": 2, "latitude": 126.9248157, "longitude": 37.52129043, "which": "bus"}, {"id": 3, "latitude": 126.9755366, "longitude": 37.56106678, "which": "bus"}, {"id": 4, "latitude": 127.07544, "longitude": 37.549752, "which": "bus"}, {"id": 5, "latitude": 127.1518429, "longitude": 37.5545613, "which": "bus"}, {"id": 6, "latitude": 126.8696103, "longitude": 37.53428779, "which": "bus"}, {"id": 7, "latitude": 127.1154171, "longitude": 37.50595672, "which": "bus"}, {"id": 8, "latitude": 127.1090264, "longitude": 37.55049601, "which": "bus"}, {"id": 9, "latitude": 127.0686842, "longitude": 37.5483289, "which": "bus"}, {"id": 10, "latitude": 127.0963953, "longitude": 37.5904649, "which": "bus"}, {"id": 11, "latitude": 127.0610138, "longitude": 37.50848985, "which": "bus"}, {"id": 12, "latitude": 126.9671194, "longitude": 37.52530577, "which": "bus"}, {"id": 13, "latitude": 127.0620209, "longitude": 37.60576191, "which": "bus"}, {"id": 14, "latitude": 126.9513962, "longitude": 37.5344941, "which": "bus"}, {"id": 15, "latitude": 127.0507511, "longitude": 37.47192069, "which": "bus"}, {"id": 16, "latitude": 126.9704189, "longitude": 37.54548616, "which": "bus"}, {"id": 17, "latitude": 127.0821222, "longitude": 37.48280463, "which": "bus"}, {"id": 18, "latitude": 126.9278043, "longitude": 37.63409454, "which": "bus"}, {"id": 19, "latitude": 127.174627, "longitude": 37.564251, "which": "bus"}, {"id": 20, "latitude": 127.1485868, "longitude": 37.48707131, "which": "bus"}, {"id": 21, "latitude": 126.951572, "longitude": 37.580686, "which": "bus"}, {"id": 22, "latitude": 127.0984014, "longitude": 37.59201745, "which": "bus"}, {"id": 23, "latitude": 126.8915088, "longitude": 37.45412149, "which": "bus"}, {"id": 24, "latitude": 127.0760329, "longitude": 37.55616091, "which": "bus"}, {"id": 25, "latitude": 127.074922, "longitude": 37.530768, "which": "bus"}, 
-  {"id": 26, "latitude": 127.1291235, "longitude": 37.48066254, "which": "bus"}, {"id": 27, "latitude": 126.9713316, "longitude": 37.57911876, "which": "bus"}, {"id": 28, "latitude": 126.9710943, "longitude": 37.48458754, "which": "bus"}, {"id": 29, "latitude": 126.910085, "longitude": 37.50132384, "which": "bus"}, {"id": 30, "latitude": 127.126489, "longitude": 37.481838, "which": "bus"}, {"id": 31, "latitude": 127.0057137, "longitude": 37.57112723, "which": "bus"}, {"id": 32, "latitude": 126.9688468, "longitude": 37.55307791, "which": "bus"}, {"id": 33, "latitude": 127.0445412, "longitude": 37.65142456, "which": "bus"}, {"id": 34, "latitude": 127.0661615, "longitude": 37.4886502, "which": "bus"}, {"id": 35, "latitude": 127.0673309, "longitude": 37.57567723, "which": "bus"}, 
-  {"id": 36, "latitude": 127.0961867, "longitude": 37.62819453, "which": "bus"}, {"id": 37, "latitude": 127.1076847, "longitude": 37.4760979, "which": "bus"}, {"id": 38, "latitude": 127.0604209, "longitude": 37.65110933, "which": "bus"}, {"id": 39, "latitude": 126.9073622, "longitude": 37.52549701, "which": "bus"}, {"id": 40, "latitude": 127.128978, "longitude": 37.491672, "which": "bus"}, {"id": 41, "latitude": 126.8551316, "longitude": 37.49717103, "which": "bus"}, {"id": 42, "latitude": 127.0383947, "longitude": 37.58192515, "which": "bus"}, {"id": 43, "latitude": 127.1138832, "longitude": 37.50387311, "which": "bus"},]
-  
 
   //매물 마커 필터링
   const filterMarkers = (markers: any[], apart: Boolean, villa: Boolean, mm: Boolean, month: Boolean, deposit: Boolean) => {
@@ -272,7 +260,7 @@ function MapHomeScreen() {
             key={id} 
             coordinate={coordinate} 
             category='school'
-            color={colors[theme].BLUE_700}
+            color={'#3F70FF'}
           />
       ))}
 
@@ -283,7 +271,7 @@ function MapHomeScreen() {
             key={id} 
             coordinate={coordinate} 
             category='school'
-            color={colors[theme].BLUE_700}
+            color={'#29479F'}
           />
       ))}
 
@@ -294,7 +282,7 @@ function MapHomeScreen() {
             key={id} 
             coordinate={coordinate} 
             category='school'
-            color={colors[theme].BLUE_700}
+            color={'#14234F'}
           />
       ))}
 
@@ -306,6 +294,17 @@ function MapHomeScreen() {
             coordinate={coordinate} 
             category='local-grocery-store'
             color={'#D16517'}
+          />
+      ))}
+
+      {mart&&others
+        .filter(({ which }) => which === 'mart')
+        .map(({ id, which, ...coordinate}) => (
+          <OtherMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='local-grocery-store'
+            color={'#757044'}
           />
       ))}
 
@@ -350,6 +349,17 @@ function MapHomeScreen() {
             coordinate={coordinate} 
             category='local-police'
             color={'#0D0540'}
+          />
+      ))}
+
+      {fire&&others
+        .filter(({ which }) => which === 'fire')
+        .map(({ id, which, ...coordinate}) => (
+          <OtherMarker 
+            key={id} 
+            coordinate={coordinate} 
+            category='local-fire-department'
+            color={colors[theme].RED_700}
           />
       ))}
 

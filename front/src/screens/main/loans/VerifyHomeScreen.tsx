@@ -48,7 +48,7 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
               </View>
               <View style={styles.buttonsContainer}>
                 <Pressable  style={styles.buttonContainer} onPress={()=>setFirst(true)}>
-                  <View  style={first? styles.selected_button : styles.button}/>
+                  <View style={first? styles.selected_button : styles.button}/>
                   <Text style={first? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
                 <Pressable  style={styles.buttonContainer} 
@@ -139,12 +139,12 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
               <View style={styles.buttonsContainer}>
                 <Pressable  style={styles.buttonContainer} 
                 onPress={()=>{showToast('중복 대출 제약', '이미 정부 지원을 받고 있다면, 추가 대출 승인에 제약이 있을 수 있습니다.');setSixth(true)}}>
-                  <View  style={sixth? styles.selected_button : styles.button}/>
+                  <View style={sixth? styles.selected_button : styles.button}/>
                   <Text style={sixth? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
                 <Pressable  style={styles.buttonContainer} 
                 onPress={()=>setSixth(false)}>
-                  <View  style={sixth?styles.button :styles.selected_button}/>
+                  <View style={sixth?styles.button :styles.selected_button}/>
                   <Text style={sixth?styles.answer:styles.selected_answer}>아니오</Text>
                 </Pressable>
               </View>
@@ -159,7 +159,7 @@ function VerifyHomeScreen({navigation}: VerifyHomeScreenProps) {
               <View style={styles.buttonsContainer}>
                 <Pressable  style={styles.buttonContainer} 
                 onPress={()=>{showToast('총 부채 수준 경고', '추가 대출에 대한 상환 능력이 부족으로 대출 승인이 어려울 수 있습니다.');setSeventh(true)}}>
-                  <View  style={seventh? styles.selected_button : styles.button}/>
+                  <View style={seventh? styles.selected_button : styles.button}/>
                   <Text style={seventh? styles.selected_answer: styles.answer}>예</Text>
                 </Pressable>
                 <Pressable  style={styles.buttonContainer} onPress={()=>setSeventh(false)}>
@@ -205,6 +205,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    color: colors[theme].BLACK,
     fontSize: 20,
     fontWeight: '700',
     padding: 20,
@@ -243,14 +244,17 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     backgroundColor: colors[theme].WHITE,
   },
   question: {
+    color: colors[theme].BLACK,
     fontSize: 12,
     fontWeight: '400',
   },
   answer: {
+    color: colors[theme].BLACK,
     fontSize: 13,
     fontWeight: '400',
   },
   selected_answer: {
+    color: colors[theme].BLACK,
     fontSize: 13,
     fontWeight: '700',
   },
@@ -269,6 +273,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
     height: 10,
     borderWidth: 1, 
     borderRadius: 5,
+    borderColor: colors[theme].BLACK,
   },
   selected_button : {
     margin: 3, 
@@ -281,7 +286,7 @@ const styling = (theme: ThemeMode) => StyleSheet.create({
   },
   back: {
     position: 'absolute',
-    width: '70%',
+    width: '80%',
     height: '50%',
     right: -50,
     bottom: -100,
